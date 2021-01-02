@@ -2,8 +2,8 @@ const express=require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
+require("./config/passport")(passport)
 const flash = require('connect-flash');
-const PassportLocal = require('passport-local').Strategy;
 const app=express();
 
 //  Setting port and statics
@@ -20,25 +20,9 @@ app.use(session({
 	saveUninitialized:true
 }))
 
+
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-passport.use(new PassportLocal(function(usuario,password,done){
-	if(usuario==="1" && password==="1")
-	{
-		return done(null,{id:1,name:'cody'}) //pass 
-	}
-	done(null,false) //No user or password recognized
-}));
-
-passport.serializeUser(function(user,done){
-	done(null,user.id)
-})
-
-passport.deserializeUser(function(id,done){
-	done(null,{id:1,name:'cody'})
-})
 
 // Set templating engine
 app.set('view engine','ejs');

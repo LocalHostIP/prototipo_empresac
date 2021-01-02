@@ -1,6 +1,6 @@
-
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
 router.get('/login',(req,res)=>{
 	//without session
@@ -10,9 +10,13 @@ router.get('/login',(req,res)=>{
 		res.render('login',{incorrecto:false});
 });
 
-router.get('/',(req,res)=>{
+router.get('/',(req,res,next)=>{
 	//Session started
-	res.redirect('/users/')
+	if(req.isAuthenticated()){
+		return next();
+	}else{
+		res.redirect('/login')
+	}
 });
 
 router.post('/login',

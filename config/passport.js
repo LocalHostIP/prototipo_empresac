@@ -1,7 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 
 module.exports = function(passport) {
-    passport.use(new PassportLocal(function(usuario,password,done){
+    passport.use(new LocalStrategy(function(usuario,password,done){
         if(usuario==="1" && password==="1")
         {
             return done(null,{id:1,name:'cody'}) //pass 
