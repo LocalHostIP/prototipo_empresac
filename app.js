@@ -1,5 +1,4 @@
 const express=require('express');
-const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 require("./config/passport")(passport)
@@ -13,13 +12,11 @@ app.use('/css',express.static(__dirname+'public/css'));
 
 app.use(flash())
 app.use(express.urlencoded({extended:true}));
-app.use(cookieParser('prototype secret'));
 app.use(session({
 	secret:'prototype secret',
 	resave:true,
 	saveUninitialized:true
 }))
-
 
 app.use(passport.initialize());
 app.use(passport.session());
