@@ -23,17 +23,12 @@
 .login-container{
     margin-top: 5%;
     margin-bottom: 5%;
-  }
+}
 
-  .groupShadow{
-    padding: 5%;
+.groupShadow{
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
   }
 
-input{
-    width: 90%;
-}
-
 .form-group{
-    min-width: 400px;
+    min-width: 200px;
 }
