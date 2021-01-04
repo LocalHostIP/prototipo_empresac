@@ -6,7 +6,7 @@ const config_role = require('./../config/role.js');
 
 //page on develpment
 router.get('/dev',(req,res)=>{
-	res.render('register',{});
+	res.render('usuario_panel',{});
 });
 
 //enter to login page

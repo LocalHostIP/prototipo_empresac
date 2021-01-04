@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+   
+	<link href="/vendor/css/jquery-ui-1.10.1.css" rel="stylesheet">
+	<link href="/vendor/css/melon.datepicker.css" rel="stylesheet">
+	<link rel="stylesheet" href="/vendor/css/mobile_menu.css">
+
+	<link rel="stylesheet" href="/css/user_panel.css">
+</head>
+<body>
+	<!-- Navigation -->
+	<div class="vertical-nav bg-dark text-light groupShadow" id="sidebar">
+		<div class="py-4 px-3 mb-4 bg-dark">
+		  <div class="media d-flex align-items-center">
+			<img src="/img/logo.jpg" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+			<div class="media-body">
+			  <h4 class="m-0">Prototipo</h4>
+			  <p class="font-weight-light text-light mb-0">Formulario</p>
+			</div>
+		  </div>
+		</div>
+	  
+		<p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Cuenta</p>
+	  
+		<ul class="nav flex-column bg-white mb-0">
+		  <li class="nav-item">
+			<a href="#" class="nav-link font-italic bg-dark text-white">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
+						<path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+					</svg>
+					  Cerrar sessión
+				  </a>
+		  </li>
+		</ul>
+
+	  </div>
+	<!-- Navigation -->
+
+	<div class="container login-container page-content " id="content">
+		<button id="sidebarCollapse" type="button" class="btn text-light btn-light bg-dark rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold"></small></button>
+		
+		<div class="row  justify-content-center ">
+		  <div class="card col-md-8 login-form-1 groupShadow">
+			<article class="card-body" style="max-width: 800px;">
+			<h4 class="card-title mt-3 text-center">Formulario</h4>
+			
+			<p class="text-center">Ingrese los datos</p>
+
+			<article>
+				<div>
+					<input type="text" id="date-picker-input-1" />
+				</div>
+			</article>
+
+			<p class="divider-text">
+			  <span class=""></span>
+			</p>
+	
+			<!-- form start-->
+			<form id="formRegister" class="needs-validation" novalidate>
+	
+			<!-- Input nombre-->
+			<div id='div_nombre' class="form-group input-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="22" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+					  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+					</svg></span>
+				</div>
+	
+				<input type="text" id="nombre" class="form-control" placeholder="Nombre completo" type="text" required>
+				<div id="lbNombre_invalid" class="invalid-feedback">
+					Colorcar el nombre
+				</div>
+			</div> <!-- end input -->
+	
+			<!-- Input empleo-->
+			<div id='div_empleo' class="form-group input-group">
+			  <div class="input-group-prepend">
+				<span class="input-group-text"> <i class="fa fa-building"></i> </span>
+			  </div>
+	
+			  <select type="text" id="empleo" class="form-control">
+				<option selected="" aria-placeholder="Tipo de trabajo">Tractorista</option>
+				<option>Designer</option>
+				<option>Manager</option>
+				<option>Accaunting</option>
+			  </select>
+			  <div id="lbEmpleo_invalid" class="invalid-feedback">
+				Agregar empleo
+			  </div>
+			</div> <!-- end input -->
+	
+			<!-- Input usuario-->
+			<div id='div_usuario' class="form-group input-group">
+			  <div class="input-group-prepend">
+				<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+			  </div>
+				<input type="text" id="usuario" class="form-control" placeholder="Nombre de usuario" type="text" required>
+				<div id="lbUsuario_invalid" class="invalid-feedback">
+				  Agregar usuario
+				</div>
+			</div> <!-- end input -->
+			
+			<!-- Input password-->
+			<div id='div_password' class="form-group input-group">
+			  <div class="input-group-prepend">
+				<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+			  </div>
+			  <input type="password" id="password" class="form-control" placeholder="Crear contraseña" type="password" required>
+			  <div id="lbPassword_invalid" class="invalid-feedback">
+				Agregar contraseña
+			  </div>
+			</div> <!-- end input -->
+	
+			<!-- Input password2-->
+			<div id='div_password2' class="form-group input-group">
+			  <div class="input-group-prepend">
+				<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+			  </div>
+			  <input type="password" id="password2" class="form-control" placeholder="Repetir contraseña" type="password" required>
+			  <div id="lbPassword2_invalid" class="invalid-feedback">
+				Agregar contraseña
+			  </div>
+			</div> <!-- form-group// -->     
+	
+			<!-- bt submit-->
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary btn-block"> Guardar </button>
+			</div> <!-- form-group// -->                                                                        
+		  </form>
+		  </article>
+		  </div> <!-- card.// -->
+		</div> 
+		<!--container end.//-->
+		</div>
+	  </div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="/vendor/js/jquery-ui-1.10.1.min.js"></script>
+
+	<script src="/vendor/js/mobile_menu.js"></script>
+
+	<script src="/js/user_panel.js"></script>
+</body>
+</html>

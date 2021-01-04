@@ -21,7 +21,8 @@ app.use(express.urlencoded({extended:true}));
 app.use(session({
 	secret:'prototype secret',
 	resave:true,
-	saveUninitialized:true
+	saveUninitialized:true,
+	maxAge: 3 * 60 * 60 * 1000 // 3 hours
 }))
 
 app.use(passport.initialize());
