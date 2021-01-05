@@ -1,3 +1,4 @@
+//Basic urls, accesded by everybody
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');

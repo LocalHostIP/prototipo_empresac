@@ -80,7 +80,7 @@
 }
 
 .ll-skin-melon .ui-datepicker td {
-	background: #f97e76;
+	background:#3d4952;
 	border: none;
 	padding: 0;
 }
@@ -101,7 +101,7 @@
 }
 
 .ll-skin-melon .ui-state-disabled .ui-state-default {
-	color: #fba49e;
+	color: #95a1ab;
 }
 
 .ll-skin-melon td .ui-state-active,

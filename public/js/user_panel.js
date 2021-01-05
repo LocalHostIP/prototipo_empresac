@@ -1,38 +1,49 @@
-//Post de registro de nuevo usario
-// $( "#formRegister" ).submit(function( event ) {
-// 	$.ajax({
-// 			type:"POST", 
-// 			url:"/admin/register", //url guarda la ruta hacia donde se hace la peticion
-// 			data:{
-// 				nombre : $('#nombre').val(),
-// 				usuario : $('#usuario').val(),
-// 				empleo:$('#empleo').val(),
-// 				password:$('#password').val(),
-// 				password2:$('#password2').val()
-// 			}, // data recive un objeto con la informacion que se enviara al servidor
-// 			success:function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
-// 				//Deletes past alerts
-// 					$(".alert").each(function(index) {
-// 							this.remove()
-// 					});
-// 					let type_errors=[]
-// 					//check server messages
-// 					for (i=0;i<datos.length;i+=1){
-// 						//Adds server alerts
-// 						$("#formRegister").append('\
-// 						<div class="alert alert-'+datos[i].type+' text-center" role="alert" text%;">\
-// 						'+datos[i].msg+'\
-// 						</div>')
-						
-// 						type_errors.push(datos[i].msgtype)
-// 					}     
-// 					refreshInputs(type_errors)
-// 			},
-// 			dataType: 'json' 
-// 	})
 
-// 	event.preventDefault(); //prevent default post
-// });
+//date picker to spanish
+
+ $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '< Ant',
+ nextText: 'Sig >',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'dd/mm/yy',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+ $.datepicker.setDefaults($.datepicker.regional['es']);
+$(function () {
+$("#fecha").datepicker();
+});
+
+
+//activate date picker
+$(function() {
+	$( "#date-picker-input-1" ).datepicker({
+		inline: true,
+		showOtherMonths: false,
+		beforeShowDay: function(d) {
+			var day = d.getDay();
+			return [(day != 0 && day != 6)];
+		}
+	})
+	.datepicker('widget').wrap('<div class="ll-skin-melon"/>');
+});
+
+$("#mydate").datepicker().datepicker("setDate", new Date());
+
+//Scroll to div_date on click, solves bug
+var posicion = $("#div_date").offset().top;
+$("html, body").animate({
+	scrollTop: posicion
+}, 1000); 
 
 //Implements css bostrap for valid and invalid inputs, parameters are input, its cointener and its component for feedback
 function makeInputValid(input,div_input,lb_feedback,valid,feedback){
@@ -49,7 +60,8 @@ function makeInputValid(input,div_input,lb_feedback,valid,feedback){
 	}
 }
 
-function refreshInputs(type_errors){ //Change inputs desing depending on errorType
+//Changes inputs desing depending on errorType
+function refreshInputs(type_errors){ 
 	div_nombre = $('#div_nombre')
 	nombre = $('#nombre')
 	lbNombre=$('#lbNombre_invalid')

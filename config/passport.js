@@ -1,10 +1,11 @@
+//Session configuration
 const LocalStrategy = require('passport-local').Strategy;
 const config_role = require('./role.js')
 const User = require("./../models/User.js")
 const bcrypt = require('bcrypt');
 
 module.exports = function(passport) {
-	passport.use(new LocalStrategy({usernameField : 'username'},(user,password,done)=> {
+	passport.use(new LocalStrategy({usernameField : 'username'},(user,password,done)=> { //Login 
 		//match user
 		User.findOne({usuario : user})
 		.then((user)=>{

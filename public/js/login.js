@@ -19,7 +19,7 @@ $(document).ready(function(){
 	});
 });
 
-//Desing for invalid inputs
+//Apply desing for valid and invalid inputs
 function makeInputValid(input,div_input,lb_feedback,valid,feedback){
 	input.removeClass('is-valid is-invalid')
 	div_input.removeClass('is-valid is-invalid')

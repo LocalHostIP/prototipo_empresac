@@ -16,22 +16,24 @@
 </head>
 <body>
 	<!-- Navigation -->
-	<div class="vertical-nav bg-dark text-light groupShadow" id="sidebar">
-		<div class="py-4 px-3 mb-4 bg-dark">
+	<div class="vertical-nav bg-white text-dark groupShadow" id="sidebar">
+		<div class="py-4 px-3 mb-4 bg-white">
 		  <div class="media d-flex align-items-center">
 			<img src="/img/logo.jpg" alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
 			<div class="media-body">
 			  <h4 class="m-0">Prototipo</h4>
-			  <p class="font-weight-light text-light mb-0">Formulario</p>
+			  <p class="font-weight-light text-dark mb-0">Formulario</p>
 			</div>
 		  </div>
+		  <p class="divider-text">
+			<span class=""></span>
+		  </p>
 		</div>
-	  
 		<p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Cuenta</p>
 	  
 		<ul class="nav flex-column bg-white mb-0">
 		  <li class="nav-item">
-			<a href="#" class="nav-link font-italic bg-dark text-white">
+			<a href="#" class="nav-link font-italic bg-white text-dark">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
 						<path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
 					</svg>
@@ -44,7 +46,7 @@
 	<!-- Navigation -->
 
 	<div class="container login-container page-content " id="content">
-		<button id="sidebarCollapse" type="button" class="btn text-light btn-light bg-dark rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold"></small></button>
+		<button id="sidebarCollapse" type="button" class="btn text-light btn-light bg-primary rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold"></small> Menu </button>
 		
 		<div class="row  justify-content-center ">
 		  <div class="card col-md-8 login-form-1 groupShadow">
@@ -52,17 +54,33 @@
 			<h4 class="card-title mt-3 text-center">Formulario</h4>
 			
 			<p class="text-center">Ingrese los datos</p>
-
-			<article>
-				<div>
-					<input type="text" id="date-picker-input-1" />
+			<br>
+			<br>
+			<div class="row" >
+			<div id='div_date' class="form-group input-group col-sm-6 mx-auto">
+				<div class="input-group-prepend">
+					<span class="input-group-text">
+				<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-calendar-date-fill" viewBox="0 0 16 16">
+					<path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zm5.402 9.746c.625 0 1.184-.484 1.184-1.18 0-.832-.527-1.23-1.16-1.23-.586 0-1.168.387-1.168 1.21 0 .817.543 1.2 1.144 1.2z"/>
+					<path d="M16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-6.664-1.21c-1.11 0-1.656-.767-1.703-1.407h.683c.043.37.387.82 1.051.82.844 0 1.301-.848 1.305-2.164h-.027c-.153.414-.637.79-1.383.79-.852 0-1.676-.61-1.676-1.77 0-1.137.871-1.809 1.797-1.809 1.172 0 1.953.734 1.953 2.668 0 1.805-.742 2.871-2 2.871zm-2.89-5.435v5.332H5.77V8.079h-.012c-.29.156-.883.52-1.258.777V8.16a12.6 12.6 0 0 1 1.313-.805h.632z"/>
+					</svg></span>
 				</div>
-			</article>
-
+				<input type="text" id="date-picker-input-1" class="form-control" placeholder="Fecha" type="text" required/>
+				<div id="lbDate_invalid" class="invalid-feedback">
+					Colocar fecha
+				</div>
+			</div> <!-- end input -->
+			</div>	
 			<p class="divider-text">
 			  <span class=""></span>
 			</p>
-	
+			<div class="row">
+				<div class="col-md-12 mx-auto">
+				<p class="text-center small text-muted">Sin guardar</p>
+				</div>
+			</div>
+			<br>
+
 			<!-- form start-->
 			<form id="formRegister" class="needs-validation" novalidate>
 	
@@ -74,62 +92,84 @@
 					</svg></span>
 				</div>
 	
-				<input type="text" id="nombre" class="form-control" placeholder="Nombre completo" type="text" required>
+				<input type="text" id="nombre" class="form-control" placeholder="Nombre completo" type="text"  value="Nombre Ejemplo" required disabled>
+				<div class="col-md-12 mx-auto">
+					<h6 class="text-center small text-info">Nombre</h6>
+				</div>
 				<div id="lbNombre_invalid" class="invalid-feedback">
 					Colorcar el nombre
 				</div>
 			</div> <!-- end input -->
 	
-			<!-- Input empleo-->
-			<div id='div_empleo' class="form-group input-group">
+			<!-- Input concepto-->
+
+			<div id='div_concepto' class="form-group input-group">
 			  <div class="input-group-prepend">
-				<span class="input-group-text"> <i class="fa fa-building"></i> </span>
+				<span class="input-group-text"> 
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hexagon-fill" viewBox="0 0 16 16">
+						<path fill-rule="evenodd" d="M8.5.134a1 1 0 0 0-1 0l-6 3.577a1 1 0 0 0-.5.866v6.846a1 1 0 0 0 .5.866l6 3.577a1 1 0 0 0 1 0l6-3.577a1 1 0 0 0 .5-.866V4.577a1 1 0 0 0-.5-.866L8.5.134z"/>
+					  </svg>
+				</span>
 			  </div>
-	
-			  <select type="text" id="empleo" class="form-control">
-				<option selected="" aria-placeholder="Tipo de trabajo">Tractorista</option>
-				<option>Designer</option>
-				<option>Manager</option>
-				<option>Accaunting</option>
+
+			  <select type="text" id="concepto" class="form-control">
+				<option selected="" aria-placeholder="Tipo de trabajo">Concepto 1</option>
+				<option>Concepto 2</option>
+				<option>Concepto 3</option>
+				<option>Concepto 4</option>
 			  </select>
+			  <div class="col-md-12 mx-auto">
+				<h6 class="text-center small text-info">Concepto</h6>
+			</div>
 			  <div id="lbEmpleo_invalid" class="invalid-feedback">
-				Agregar empleo
+				Agregar concepto
 			  </div>
 			</div> <!-- end input -->
-	
-			<!-- Input usuario-->
-			<div id='div_usuario' class="form-group input-group">
+
+			<!-- Input cantidad-->
+			<div id='div_cantidad' class="form-group input-group">
+
 			  <div class="input-group-prepend">
-				<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+				<span class="input-group-text"> 
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hash" viewBox="0 0 16 16">
+						<path d="M8.39 12.648a1.32 1.32 0 0 0-.015.18c0 .305.21.508.5.508.266 0 .492-.172.555-.477l.554-2.703h1.204c.421 0 .617-.234.617-.547 0-.312-.188-.53-.617-.53h-.985l.516-2.524h1.265c.43 0 .618-.227.618-.547 0-.313-.188-.524-.618-.524h-1.046l.476-2.304a1.06 1.06 0 0 0 .016-.164.51.51 0 0 0-.516-.516.54.54 0 0 0-.539.43l-.523 2.554H7.617l.477-2.304c.008-.04.015-.118.015-.164a.512.512 0 0 0-.523-.516.539.539 0 0 0-.531.43L6.53 5.484H5.414c-.43 0-.617.22-.617.532 0 .312.187.539.617.539h.906l-.515 2.523H4.609c-.421 0-.609.219-.609.531 0 .313.188.547.61.547h.976l-.516 2.492c-.008.04-.015.125-.015.18 0 .305.21.508.5.508.265 0 .492-.172.554-.477l.555-2.703h2.242l-.515 2.492zm-1-6.109h2.266l-.515 2.563H6.859l.532-2.563z"/>
+					  </svg>
+				</span>
 			  </div>
-				<input type="text" id="usuario" class="form-control" placeholder="Nombre de usuario" type="text" required>
-				<div id="lbUsuario_invalid" class="invalid-feedback">
-				  Agregar usuario
+				<input type="number" id="cantidad" class="form-control" placeholder="Cantidad" min="0" max="200" step="1" type="text" required>
+				<div class="col-md-12 mx-auto">
+					<h6 class="text-center small text-info">Cantidad</h6>
+				</div>
+				<div id="lbCantidad_invalid" class="invalid-feedback">
+				  Agregar cantidad
 				</div>
 			</div> <!-- end input -->
 			
-			<!-- Input password-->
-			<div id='div_password' class="form-group input-group">
-			  <div class="input-group-prepend">
-				<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-			  </div>
-			  <input type="password" id="password" class="form-control" placeholder="Crear contraseña" type="password" required>
-			  <div id="lbPassword_invalid" class="invalid-feedback">
-				Agregar contraseña
-			  </div>
-			</div> <!-- end input -->
 	
-			<!-- Input password2-->
-			<div id='div_password2' class="form-group input-group">
-			  <div class="input-group-prepend">
-				<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+			<!-- Input concepto-->
+			<div id='div_concepto' class="form-group input-group">
+				<div class="input-group-prepend">
+				  <span class="input-group-text"> 
+					  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hexagon-fill" viewBox="0 0 16 16">
+						  <path fill-rule="evenodd" d="M8.5.134a1 1 0 0 0-1 0l-6 3.577a1 1 0 0 0-.5.866v6.846a1 1 0 0 0 .5.866l6 3.577a1 1 0 0 0 1 0l6-3.577a1 1 0 0 0 .5-.866V4.577a1 1 0 0 0-.5-.866L8.5.134z"/>
+						</svg>
+				  </span>
+				</div>
+  
+				<select type="text" id="predio" class="form-control">
+				  <option selected="" aria-placeholder="Tipo de trabajo">Predio 1</option>
+				  <option>Predio 2</option>
+				  <option>Predio 3</option>
+				  <option>Predio 4</option>
+				</select>
+				<div class="col-md-12 mx-auto">
+				  <h6 class="text-center small text-info">Predio</h6>
 			  </div>
-			  <input type="password" id="password2" class="form-control" placeholder="Repetir contraseña" type="password" required>
-			  <div id="lbPassword2_invalid" class="invalid-feedback">
-				Agregar contraseña
-			  </div>
-			</div> <!-- form-group// -->     
-	
+				<div id="lbEmpleo_invalid" class="invalid-feedback">
+				  Agregar predio
+				</div>
+			  </div> <!-- end input -->
+
 			<!-- bt submit-->
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary btn-block"> Guardar </button>
