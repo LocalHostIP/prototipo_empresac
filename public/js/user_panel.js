@@ -79,3 +79,13 @@ function refreshInputs(type_errors){
 	}
 }
 
+//On date changed redirect
+$('#date').change(function(){
+	window.location.href = '/users/'+$('#date').val(); //one level up
+})
+
+//Date picker disable days
+$( document ).ready(function() {
+	var datetime = new Date();
+	$("#date").prop('max',datetime.toISOString().slice(0,10));
+});
