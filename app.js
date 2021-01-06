@@ -35,6 +35,11 @@ app.set('view engine','ejs');
 app.use('/',require('./routes/index'));
 app.use('/users',require('./routes/users'));
 app.use('/admin',require('./routes/admin'));
+//page not found
+app.use('*', function(req,res){
+    res.status(404)
+    res.render('errorPage')     
+})
 
 //Listening
 var server = require('http').Server(app);

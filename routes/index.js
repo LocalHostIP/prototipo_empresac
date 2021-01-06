@@ -23,7 +23,8 @@ router.get('/',(req,res,next)=>{
 	//Session started
 	if(req.isAuthenticated()){ //If user is not authenticated then redirect to login
 		if(req.user['role']==config_role.User){ //If user is admin then send to control panel, if not then send to normal user panel
-			res.redirect('users/');
+			var datetime = new Date();
+			res.redirect('users/'+datetime.toISOString().slice(0,10)); //send to current date panel
 		}else{
 			res.redirect('admin/register');
 		}
@@ -43,5 +44,6 @@ router.post('/login',
 //logout
 router.get('/logout',(req,res)=>{
  })
+
 
 module.exports  = router;

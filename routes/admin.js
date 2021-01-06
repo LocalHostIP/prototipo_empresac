@@ -70,7 +70,6 @@ router.post('/register',(req,res)=>{
 			  //save user
 			  newUser.save()
 			  .then((value)=>{
-				  console.log(value)
 				  mensajes.push({type:'success',msg:'Usuario creado con exito',msgtype:120})
 				  res.send(mensajes)
 			  })

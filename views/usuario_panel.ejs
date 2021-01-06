@@ -8,8 +8,6 @@
 	
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
    
-	<link href="/vendor/css/jquery-ui-1.10.1.css" rel="stylesheet">
-	<link href="/vendor/css/melon.datepicker.css" rel="stylesheet">
 	<link rel="stylesheet" href="/vendor/css/mobile_menu.css">
 
 	<link rel="stylesheet" href="/css/user_panel.css">
@@ -57,6 +55,8 @@
 			<br>
 			<br>
 			<div class="row" >
+
+			<!-- Input fecha -->
 			<div id='div_date' class="form-group input-group col-sm-6 mx-auto">
 				<div class="input-group-prepend">
 					<span class="input-group-text">
@@ -65,11 +65,13 @@
 					<path d="M16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-6.664-1.21c-1.11 0-1.656-.767-1.703-1.407h.683c.043.37.387.82 1.051.82.844 0 1.301-.848 1.305-2.164h-.027c-.153.414-.637.79-1.383.79-.852 0-1.676-.61-1.676-1.77 0-1.137.871-1.809 1.797-1.809 1.172 0 1.953.734 1.953 2.668 0 1.805-.742 2.871-2 2.871zm-2.89-5.435v5.332H5.77V8.079h-.012c-.29.156-.883.52-1.258.777V8.16a12.6 12.6 0 0 1 1.313-.805h.632z"/>
 					</svg></span>
 				</div>
-				<input type="text" id="date-picker-input-1" class="form-control" placeholder="Fecha" type="text" required/>
+				<input type="date" class="form-control" placeholder="Fecha" type="text" value="<%=data.fecha%>" max="2021-01-06" required/>
 				<div id="lbDate_invalid" class="invalid-feedback">
 					Colocar fecha
 				</div>
 			</div> <!-- end input -->
+
+			<!-- Divider -->
 			</div>	
 			<p class="divider-text">
 			  <span class=""></span>
@@ -80,7 +82,8 @@
 				</div>
 			</div>
 			<br>
-
+			<!-- End divider-->
+			
 			<!-- form start-->
 			<form id="formRegister" class="needs-validation" novalidate>
 	
@@ -92,17 +95,16 @@
 					</svg></span>
 				</div>
 	
-				<input type="text" id="nombre" class="form-control" placeholder="Nombre completo" type="text"  value="Nombre Ejemplo" required disabled>
+				<input type="text" id="nombre" class="form-control" placeholder="Nombre completo" type="text"  value="<%=data.datos.nombre%> " required disabled>
 				<div class="col-md-12 mx-auto">
 					<h6 class="text-center small text-info">Nombre</h6>
 				</div>
 				<div id="lbNombre_invalid" class="invalid-feedback">
 					Colorcar el nombre
 				</div>
-			</div> <!-- end input -->
+			</div> <!-- end nombre -->
 	
 			<!-- Input concepto-->
-
 			<div id='div_concepto' class="form-group input-group">
 			  <div class="input-group-prepend">
 				<span class="input-group-text"> 
@@ -112,19 +114,14 @@
 				</span>
 			  </div>
 
-			  <select type="text" id="concepto" class="form-control">
-				<option selected="" aria-placeholder="Tipo de trabajo">Concepto 1</option>
-				<option>Concepto 2</option>
-				<option>Concepto 3</option>
-				<option>Concepto 4</option>
-			  </select>
+			  <input type="search" id="concepto" class="form-control" value="<%=data.datos.concepto%>" <% if(!data.habilitado){ %> disabled <% }%> list="list_conceptos">
 			  <div class="col-md-12 mx-auto">
 				<h6 class="text-center small text-info">Concepto</h6>
 			</div>
-			  <div id="lbEmpleo_invalid" class="invalid-feedback">
+			  <div id="lbConcepto_invalid" class="invalid-feedback">
 				Agregar concepto
 			  </div>
-			</div> <!-- end input -->
+			</div> <!-- end concepto -->
 
 			<!-- Input cantidad-->
 			<div id='div_cantidad' class="form-group input-group">
@@ -136,18 +133,18 @@
 					  </svg>
 				</span>
 			  </div>
-				<input type="number" id="cantidad" class="form-control" placeholder="Cantidad" min="0" max="200" step="1" type="text" required>
+				<input type="number" id="cantidad" class="form-control" placeholder="Cantidad" <% if(!data.habilitado){ %> disabled <% }%> value="<%=data.datos.cantidad%>" min="0" max="200" step="1" type="text" required>
 				<div class="col-md-12 mx-auto">
 					<h6 class="text-center small text-info">Cantidad</h6>
 				</div>
 				<div id="lbCantidad_invalid" class="invalid-feedback">
 				  Agregar cantidad
 				</div>
-			</div> <!-- end input -->
+			</div> 
+			<!-- end Cantidad -->
 			
-	
-			<!-- Input concepto-->
-			<div id='div_concepto' class="form-group input-group">
+			<!-- Input predial-->
+			<div id='div_predial' class="form-group input-group">
 				<div class="input-group-prepend">
 				  <span class="input-group-text"> 
 					  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hexagon-fill" viewBox="0 0 16 16">
@@ -156,16 +153,11 @@
 				  </span>
 				</div>
   
-				<select type="text" id="predio" class="form-control">
-				  <option selected="" aria-placeholder="Tipo de trabajo">Predio 1</option>
-				  <option>Predio 2</option>
-				  <option>Predio 3</option>
-				  <option>Predio 4</option>
-				</select>
+				<input type="search" id="predio" value="<%=data.datos.predio%>" <% if(!data.habilitado){ %> disabled <% }%> class="form-control" list="list_predio">
 				<div class="col-md-12 mx-auto">
 				  <h6 class="text-center small text-info">Predio</h6>
 			  </div>
-				<div id="lbEmpleo_invalid" class="invalid-feedback">
+				<div id="lbPredio_invalid" class="invalid-feedback">
 				  Agregar predio
 				</div>
 			  </div> <!-- end input -->
@@ -181,8 +173,22 @@
 		<!--container end.//-->
 		</div>
 	  </div>
+
+	<!-- Lista sugerencias concepto y predio -->
+	<datalist id="list_conceptos">
+		<option value="Concepto 1">
+		<option value="Concepto 2">
+		<option value="Concepto 3">
+		<option value="Concepto 4">
+	</datalist>
+	<datalist id="list_predio">
+		<option value="Predio 1">
+		<option value="Predio 2">
+		<option value="Predio 3">
+		<option value="Predio 4">
+	</datalist>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="/vendor/js/jquery-ui-1.10.1.min.js"></script>
 
 	<script src="/vendor/js/mobile_menu.js"></script>
 

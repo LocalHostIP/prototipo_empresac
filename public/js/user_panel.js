@@ -1,43 +1,4 @@
 
-//date picker to spanish
-
- $.datepicker.regional['es'] = {
- closeText: 'Cerrar',
- prevText: '< Ant',
- nextText: 'Sig >',
- currentText: 'Hoy',
- monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
- monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
- dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
- dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
- dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
- weekHeader: 'Sm',
- dateFormat: 'dd/mm/yy',
- firstDay: 1,
- isRTL: false,
- showMonthAfterYear: false,
- yearSuffix: ''
- };
- $.datepicker.setDefaults($.datepicker.regional['es']);
-$(function () {
-$("#fecha").datepicker();
-});
-
-
-//activate date picker
-$(function() {
-	$( "#date-picker-input-1" ).datepicker({
-		inline: true,
-		showOtherMonths: false,
-		beforeShowDay: function(d) {
-			var day = d.getDay();
-			return [(day != 0 && day != 6)];
-		}
-	})
-	.datepicker('widget').wrap('<div class="ll-skin-melon"/>');
-});
-
-$("#mydate").datepicker().datepicker("setDate", new Date());
 
 //Scroll to div_date on click, solves bug
 var posicion = $("#div_date").offset().top;
