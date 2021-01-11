@@ -1,10 +1,71 @@
 
-
-//Scroll to div_date on click, solves bug
+//Scroll to div_date
 var posicion = $("#div_date").offset().top;
 $("html, body").animate({
 	scrollTop: posicion
 }, 1000); 
+
+
+//validates day format
+function isValidDate(dateString) {
+	var regEx = /^\d{4}-\d{2}-\d{2}$/;
+	if(!dateString.match(regEx)) return false;  // Invalid format
+	var d = new Date(dateString);
+	var dNum = d.getTime();
+	if(!dNum && dNum !== 0) return false; // NaN value, Invalid date
+	return d.toISOString().slice(0,10) === dateString;
+}
+
+//validate inputs
+$( "#main_form" ).submit(function( event ) {
+	validPost=true;
+	//get inputs
+	let date=$("#date").val();
+	let concepto=$("#concepto").val();
+	let cantidad=$("#cantidad").val();
+	let predio=$("#predio").val();
+
+	//validate date
+	if (!isValidDate(date)){
+		makeInputValid($('#date'),$('#div_date'),$('#lbDate_invalid'),false,'Fecha no valida');
+		validPost=false;
+	}
+
+	//validate cantidad
+	if(isNaN(cantidad)){
+		makeInputValid($('#cantidad'),$('#div_cantidad'),$('#lbCantidad_invalid'),false,'No es un número');
+		validPost=false;
+	}
+
+	if (validPost){
+		$.ajax({
+			type:"POST", 
+			url:"/users/"+date, //url guarda la ruta hacia donde se hace la peticion
+			data:{
+				concepto : concepto,
+				cantidad: cantidad,
+				predio: predio,
+			}, // data recive un objeto con la informacion que se enviara al servidor
+			success:function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
+				let type_errors=[]
+				let msgs=[]
+				//check server messages
+				for (i=0;i<datos.length;i+=1){			
+					type_errors.push(datos[i].msgtype)
+					msgs.push(datos[i].msg)
+				}     
+
+				if(type_errors.includes(100)){ //Fecha registrada cone exito
+					location.reload();
+				}	
+				refreshInputs(msgs)
+			},
+			dataType: 'json' 
+		})
+	}
+
+	event.preventDefault(); //prevent default post
+});
 
 //Implements css bostrap for valid and invalid inputs, parameters are input, its cointener and its component for feedback
 function makeInputValid(input,div_input,lb_feedback,valid,feedback){
@@ -22,60 +83,52 @@ function makeInputValid(input,div_input,lb_feedback,valid,feedback){
 }
 
 //Changes inputs desing depending on errorType
-function refreshInputs(type_errors){ 
-	div_nombre = $('#div_nombre')
-	nombre = $('#nombre')
-	lbNombre=$('#lbNombre_invalid')
+function refreshInputs(errors){ 
+	date = $('#date')
+	div_date=$('#div_date')
+	lb_date=$('#lbDate_invalid')
 
-	div_usuario = $('#div_usuario')
-	usuario = $('#usuario')
-	lbUsuario=$('#lbUsuario_invalid')
+	concepto = $('#concepto')
+	div_concepto=$('#div_concepto')
+	lb_concepto=$('#lbConcepto_invalid')
 
-	div_empleo = $('#div_empleo')
-	empleo=$('#empleo')
-	lbEmpleo=$('#lbEmpleo_invalid')
+	predio = $('#predio')
+	div_predio=$('#div_predio')
+	lb_predio=$('#lbPredio_invalid')
 
-	div_password = $('#div_password')
-	password=$('#password')
-	lbPassword=$('#lbPassword_invalid')
+	cantidad = $('#cantidad')
+	div_cantidad=$('#div_cantidad')
+	lb_cantidad=$('#lbCantidad_invalid')
 
-	div_password2 = $('#div_password2')
-	password2=$('#password2')
-	lbPassword2=$('#lbPassword2_invalid')
-	makeInputValid(nombre,div_nombre,lbNombre,true,"") 
-	makeInputValid(usuario,div_usuario,lbUsuario,true,"")
-	makeInputValid(empleo,div_empleo,lbEmpleo,true,"")
-	makeInputValid(password,div_password,lbPassword,true,"")
-	makeInputValid(password2,div_password2,lbPassword2,true,"")
-	
-	if(type_errors.includes(111)){ //Campos no llenados
-		if (nombre.val()=="")
-			makeInputValid(nombre,div_nombre,lbNombre,false,"Agregue el nombre")
+	makeInputValid(date,div_date,lb_date,true,"") 
+	makeInputValid(concepto,div_concepto,lb_concepto,true,"") 
+	makeInputValid(predio,div_predio,lb_predio,true,"") 
+	makeInputValid(cantidad,div_cantidad,lb_cantidad,true,"") 
 
-		if (usuario.val()=="")
-			makeInputValid(usuario,div_usuario,lbUsuario,false,"Agrege el usuario")
-		
-		if (empleo.val()=="")
-			makeInputValid(empleo,div_empleo,lbEmpleo,false,"Agrege el empleo")
-
-		if (password.val()=="")
-			makeInputValid(password,div_password,lbPassword,false,"Agrege una contraseña")
-		
-		if (password2.val()=="")
-			makeInputValid(password2,div_password2,lbPassword2,false,"Repita la contraseña")
+	if(errors.includes('Concepto invalido')){
+		makeInputValid(concepto,div_concepto,lb_concepto,false,'Concepto invalido')
 	}
-	if(type_errors.includes(112)){ //Password don't match
-			makeInputValid(password2,div_password2,lbPassword2,false,"Las contraseñas no coinciden")
-			password2.focus()
+	if(errors.includes('Predio invalido')){
+		makeInputValid(predio,div_predio,lb_predio,false,'Predio invalido')
 	}
-	if(type_errors.includes(113)){ //Password too short 
-		makeInputValid(password2,div_password2,lbPassword2,false,"Contraseña mayor a 4 caracteres")
-		makeInputValid(password,div_password,lbPassword,false,"Contraseña mayor a 4 caracteres")
-		password.focus()
-	}  
-	if(type_errors.includes(114)){ //User repeated
-		makeInputValid(usuario,div_usuario,lbUsuario,false,"Ya existe ese usuario")
-		usuario.focus()
+	if(errors.includes('Cantidad invalida')){
+		makeInputValid(cantidad,div_cantidad,lb_cantidad,false,'Cantidad invalida')
+	}
+	if(errors.includes('Fecha invalida')){
+		makeInputValid(fecha,div_cantidad,lb_cantidad,false,'Fecha invalida')
+	}
+
+	if(errors.includes('Concepto vacio')){
+		makeInputValid(concepto,div_concepto,lb_concepto,false,'Agregue el concepto')
+	}
+	if(errors.includes('Predio vacio')){
+		makeInputValid(predio,div_predio,lb_predio,false,'Agregue el predio')
+	}
+	if(errors.includes('Cantidad vacio')){
+		makeInputValid(cantidad,div_cantidad,lb_cantidad,false,'Agregue la cantidad')
+	}
+	if(errors.includes('Fecha vacio')){
+		makeInputValid(fecha,div_cantidad,lb_cantidad,false,'Agregue la fecha')
 	}
 }
 

@@ -35,6 +35,11 @@
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
   }
 
-.form-group{
-    min-width: 200px;
+#div_cantidad{
+    max-width: 120px;
+    padding-left: 2px;
 }
+#div_concepto{
+    padding-right: 2px;
+}
+

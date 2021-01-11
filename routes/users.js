@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const config_role = require('./../config/role.js');
 const Fechadb = require("../models/Fechadb.js")
+const config_form = require("../config/form_data.js")
 
 //validates day format
 function isValidDate(dateString) {
@@ -25,22 +26,23 @@ router.get('/:p_date',(req,res)=>{
 				datos_defualt={
 					fecha:date,
 					habilitado:true,
+					saved:'Sin guardar',
 					datos:{
 						nombre:'Nombre Prueba',
-						concepto:'Concepto 1',
-						cantidad:12,
-						id_concepto:'id_concepto_prueba',
-						predio:'Predio 1',
-						id_elemento:'id elemento prueba',
+						concepto:'',
+						cantidad:1,
+						id_concepto:'',
+						predio:'',
+						id_elemento:'',
 					}
-
 				};
 				//Look for day on database 
 				Fechadb.findOne({usuario:'tb1',fecha:(date.toString())}).exec((err,resDate)=>{
 					if(resDate) {
-						res.render('usuario_panel',{data:resDate});
+						resDate['saved']='Guardado';
+						res.render('usuario_panel',{data:resDate,conceptos:config_form.concepto,predios:config_form.predio});
 					}else{
-						res.render('usuario_panel',{data:datos_defualt});
+						res.render('usuario_panel',{data:datos_defualt,conceptos:config_form.concepto,predios:config_form.predio});
 					} 
 					})
 				//enviar pagina
@@ -62,47 +64,85 @@ router.post('/:p_date',(req,res)=>{
 		//validate autentification req.isAuthenticated()
 		if(true){ //Validate role req.user['role']==config_role.User
 			if(true){ 
-				//Convert day to format dd/mm/yyyy
-				let varAuxDay=req.params.p_date.split('-') 
-				let date=varAuxDay[2]+'/'+varAuxDay[1]+'/'+varAuxDay[0]
-
 				//Look for day on database 
-				Fechadb.findOne({fecha : date,usuario:'tb1'}).exec((err,resDate)=>{
-					if(resDate) {
-						console.log('dia encontrado')
-					} 
-					else {
-					  const newDay = new Fechadb({
-						  fecha : date,
-						  usuario : 'tb1',
-						  habilitado:false,
-						  datos:{
-							  nombre:'Nombre Prueba',
-							  concepto:'Concepto 1',
-							  cantidad:12,
-							  id_concepto:'id_concepto_prueba',
-							  predio:'Predio 1',
-							  id_elemento:'id elemento prueba',
-						  }
-					  });
-						//save user
+				let newDay = {};
+				let respuesta=[]
+
+				//validate data
+				const {concepto,cantidad,predio} = req.body; 
+				let date=req.params.p_date;
+				
+				//Concepto
+				if(concepto=='')
+					respuesta.push({msgtype:201,msg:'Concepto vacio'});
+				else if (!config_form.concepto.includes(concepto))
+					respuesta.push({msgtype:202,msg:'Concepto invalido'});
+				
+				//Predio
+				if(predio=='')
+					respuesta.push({msgtype:201,msg:'Predio vacio'});
+				else if (!config_form.predio.includes(predio))
+					respuesta.push({msgtype:202,msg:"Predio invalido"});
+
+				//Cantidad
+				if(cantidad=='')
+					respuesta.push({msgtype:201,msg:'Cantidad vacio'});
+				else if (isNaN(cantidad))
+					respuesta.push({msgtype:202,msg:"Cantidad invalida"});
+
+				if (respuesta.length>0){ //got errors
+					res.send(respuesta);
+				}else{ //Validation passed
+				//Finding an existing date
+					Fechadb.findOne({usuario:'tb1',fecha:(date.toString())}).exec((err,resDate)=>{
+						if(resDate) {
+							newDay=resDate;
+							newDay.datos={
+								nombre:'Nombre Prueba',
+								concepto:concepto,
+								cantidad:cantidad,
+								id_concepto:'id prueba',
+								predio:predio,
+								id_elemento:'id prueba',
+							}
+						}
+						else {
+							newDay = new Fechadb({
+								fecha : date,
+								usuario : 'tb1',
+								habilitado:true,
+								datos:{
+									nombre:'Nombre Prueba',
+									concepto:concepto,
+									cantidad:cantidad,
+									id_concepto:'id prueba',
+									predio:predio,
+									id_elemento:'id prueba',
+								}
+							});
+						}
+						//save date
 						newDay.save()
 						.then((value)=>{
-							console.log('creado')
+							respuesta.push({msgtype:100,msg:'Guardado correctamente'})
+							res.send(respuesta)
 						})
-						.catch(value=> console.log(value));
-					  } //ELSE statement ends here
-					})
-				//enviar pagina
-				res.render('usuario_panel')
+						.catch(value=> { //Error on saving on database
+							console.log(value)
+							respuesta.push({msgtype:270,msg:'Error en la base de datos'})
+							res.send(respuesta)
+						});
+					});
+				}
+				//---------------------------------------
 			}else{
-				res.redirect('admin/');
+				res.send({msgtype:250,msg:'No autentificado como usuario'})
 			}
 		}else{
-			res.redirect('/login');
+			res.send({msgtype:250,msg:'No autentificado como usuario'});
 		}
 	}else{
-		res.render('errorPage')
+		res.send({msgtype:202,msg:"Fecha invalida"});
 	}
 });
 
