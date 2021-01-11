@@ -43,6 +43,8 @@ router.post('/login',
 
 //logout
 router.get('/logout',(req,res)=>{
+	req.logout();
+	res.redirect('/login');
  })
 
 
