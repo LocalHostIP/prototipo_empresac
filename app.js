@@ -6,6 +6,7 @@ const flash = require('connect-flash'); //Send messeges to client
 const mongoose = require('mongoose');
 const app=express();	
 const db_config = require('./config/db.js')
+var favicon = require('serve-favicon');
 
 //Configure mongoos's promise to global promise
 mongoose.promise = global.Promise;
@@ -14,6 +15,9 @@ mongoose.connect(db_config.url,{useNewUrlParser: true, useUnifiedTopology : true
 //  Setting port and statics
 app.set('port', process.env.PORT || 7777); //Setting port automatically
 app.use(express.static('public')); //Setting public files
+
+//configure favicon
+app.use(favicon('./public/favicon.ico'));
 
 app.use(flash()) 
 app.use(express.urlencoded({extended:true}));
