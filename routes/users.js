@@ -3,7 +3,9 @@ const express = require('express');
 const router = express.Router();
 const config_role = require('./../config/role.js');
 const Fechadb = require("../models/Fechadb.js")
-const config_form = require("../config/form_data.js")
+var config_form = require("../config/form_data.js")
+
+config_form.actualizar()
 
 //validates day format
 function isValidDate(dateString) {
@@ -22,7 +24,6 @@ router.get('/:p_date',(req,res)=>{
 		if(true){ //Validate role req.user['role']==config_role.User
 			if(true){ 
 				let date=req.params.p_date;
-				
 				datos_defualt={
 					fecha:date,
 					habilitado:true,
@@ -40,9 +41,9 @@ router.get('/:p_date',(req,res)=>{
 				Fechadb.findOne({usuario:'tb1',fecha:(date.toString())}).exec((err,resDate)=>{
 					if(resDate) {
 						resDate['saved']='Guardado';
-						res.render('usuario_panel',{data:resDate,conceptos:config_form.concepto,predios:config_form.predio});
+						res.render('usuario_panel',{data:resDate,conceptos:config_form.getConceptos(),predios:config_form.getPredios()});
 					}else{
-						res.render('usuario_panel',{data:datos_defualt,conceptos:config_form.concepto,predios:config_form.predio});
+						res.render('usuario_panel',{data:datos_defualt,conceptos:config_form.getConceptos(),predios:config_form.getPredios()});
 					} 
 					})
 				//enviar pagina
@@ -75,13 +76,13 @@ router.post('/:p_date',(req,res)=>{
 				//Concepto
 				if(concepto=='')
 					respuesta.push({msgtype:201,msg:'Concepto vacio'});
-				else if (!config_form.concepto.includes(concepto))
+				else if (!config_form.getConceptos().includes(concepto))
 					respuesta.push({msgtype:202,msg:'Concepto invalido'});
 				
 				//Predio
 				if(predio=='')
 					respuesta.push({msgtype:201,msg:'Predio vacio'});
-				else if (!config_form.predio.includes(predio))
+				else if (!config_form.getPredios().includes(predio))
 					respuesta.push({msgtype:202,msg:"Predio invalido"});
 
 				//Cantidad
@@ -101,9 +102,9 @@ router.post('/:p_date',(req,res)=>{
 								nombre:'Nombre Prueba',
 								concepto:concepto,
 								cantidad:cantidad,
-								id_concepto:'id prueba',
-								predio:predio,
-								id_elemento:'id prueba',
+								id_concepto:config_form.findConceptoID(concepto),
+								id_elemento:config_form.findPredioID(predio),
+								predio:predio
 							}
 						}
 						else {
@@ -115,9 +116,9 @@ router.post('/:p_date',(req,res)=>{
 									nombre:'Nombre Prueba',
 									concepto:concepto,
 									cantidad:cantidad,
-									id_concepto:'id prueba',
-									predio:predio,
-									id_elemento:'id prueba',
+									id_concepto:config_form.findConceptoID(concepto),
+									id_elemento:config_form.findPredioID(predio),
+									predio:predio
 								}
 							});
 						}

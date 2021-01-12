@@ -5,7 +5,6 @@ require("./config/passport")(passport) //Login config
 const flash = require('connect-flash'); //Send messeges to client
 const mongoose = require('mongoose');
 const app=express();	
-require('./models/User');
 const db_config = require('./config/db.js')
 
 //Configure mongoos's promise to global promise

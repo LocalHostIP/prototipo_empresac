@@ -6,6 +6,8 @@ const config_role = require('./../config/role.js')
 const User = require("./../models/User.js")
 const bcrypt = require('bcrypt');
 
+var config_form = require("../config/form_data.js")
+
 router.get('/register',(req,res,next)=>{
     if(req.isAuthenticated()){ //If user is not authenticated and is admin
 		if(req.user['role']==config_role.Admin){ 
