@@ -20,16 +20,15 @@ function isValidDate(dateString) {
 router.get('/:p_date',(req,res)=>{
 	//validate day
 	if(isValidDate(req.params.p_date)){
-		//validate autentification req.isAuthenticated()
-		if(true){ //Validate role req.user['role']==config_role.User
-			if(true){ 
+		if(req.isAuthenticated()){ //Validate role 
+			if(req.user['role']==config_role.User){ 
 				let date=req.params.p_date;
 				datos_defualt={
 					fecha:date,
 					habilitado:true,
 					saved:'Sin guardar',
 					datos:{
-						nombre:'Nombre Prueba',
+						nombre:req.user.nombre,
 						concepto:'',
 						cantidad:1,
 						id_concepto:'',
@@ -61,10 +60,9 @@ router.get('/:p_date',(req,res)=>{
 
 router.post('/:p_date',(req,res)=>{
 	//validate day
-	if(isValidDate(req.params.p_date)){
-		//validate autentification req.isAuthenticated()
-		if(true){ //Validate role req.user['role']==config_role.User
-			if(true){ 
+	if(isValidDate(req.params.p_date)){ 
+		if(req.isAuthenticated()){ //validate autentification
+			if(req.user['role']==config_role.User){ //Validate role 
 				//Look for day on database 
 				let newDay = {};
 				let respuesta=[]
@@ -99,7 +97,7 @@ router.post('/:p_date',(req,res)=>{
 						if(resDate) {
 							newDay=resDate;
 							newDay.datos={
-								nombre:'Nombre Prueba',
+								nombre:req.user.nombre,
 								concepto:concepto,
 								cantidad:cantidad,
 								id_concepto:config_form.findConceptoID(concepto),
@@ -113,7 +111,7 @@ router.post('/:p_date',(req,res)=>{
 								usuario : 'tb1',
 								habilitado:true,
 								datos:{
-									nombre:'Nombre Prueba',
+									nombre:req.user.nombre,
 									concepto:concepto,
 									cantidad:cantidad,
 									id_concepto:config_form.findConceptoID(concepto),
