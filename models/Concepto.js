@@ -1,7 +1,7 @@
 //Concepto database structure
 const mongoose = require('mongoose');
 const UserSchema  = new mongoose.Schema({
-  	IdConcepto :{
+	IdConcepto :{
 	  	type  : String,
 	  	required : true
   	},
@@ -18,18 +18,22 @@ const UserSchema  = new mongoose.Schema({
 		required : true
 	},
 	ImporteFijo :{
-		type  : Number,
+		type  : String,
 		required : true
 	},
-	FactorCaputra :{
-		type  : Number,
+	FactorCaptura :{
+		type  : String,
 		required : true
 	},
 	Substituye :{
-		type  : Number,
+		type  : String,
+		required : true
+	},
+	Busqueda :{
+		type  : String,
 		required : true
 	}
 });
-const Concepto= mongoose.model('Concepto',UserSchema);
+const Concepto= mongoose.model('conceptos',UserSchema);
 
 module.exports = Concepto;

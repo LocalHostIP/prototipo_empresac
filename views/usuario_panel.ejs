@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario</title>
+	<title>Formulario</title>	
+
+	<!-- Dependencies -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<link rel="stylesheet" href="/css/user_panel.css">
+
 </head>
 <body>
 	<div class="container login-container">
@@ -27,8 +32,14 @@
 			</div>
 
 			<br>
+			<a href="/logout" class="nav-link font-italic bg-white text-dark text-center">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
+					<path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+				</svg>
+					Cambiar de usuario
+			  </a>   
 			<br>
-
+			<br>
 			<div class="row" >
 			<!-- Input fecha -->
 			<div id='div_date' class="form-group input-group col-sm-6 mx-auto">
@@ -43,23 +54,8 @@
 					Colocar fecha
 				</div>
 			</div> <!-- end input -->
-
-			<!-- Divider -->
 			</div>	
-			<p class="divider-text">
-			  <span class=""></span>
-			</p>
-			<div class="row">
-				<div class="col-md-12 mx-auto">
-				<p class="text-center small <% if (data.saved=='Guardado') {%> text-primary <%} else {%> text-muted <%}%> "><%=data.saved%></p>
-				</div>
-			</div>
-			<br>
-			<!-- End divider-->
-			
-			<!-- form start-->
-			<form id="main_form" class="needs-validation" novalidate>
-	
+		
 			<!-- Input nombre-->
 			<div id='div_nombre' class="form-group input-group">
 				<div class="input-group-prepend">
@@ -68,15 +64,26 @@
 					</svg></span>
 				</div>
 	
-				<input type="text" id="nombre" class="form-control" placeholder="Nombre completo" type="text"  value="<%=data.datos.nombre%> " required disabled>
-				<div class="col-md-12 mx-auto">
-					<h6 class="text-center small text-info">Nombre</h6>
-				</div>
+				<input type="text" id="nombre" class="form-control" placeholder="Nombre completo" type="text"  value="<%=data.datos.nombre%>" required disabled>
+
 				<div id="lbNombre_invalid" class="invalid-feedback">
 					Colorcar el nombre
 				</div>
 			</div> <!-- end nombre -->
-	
+
+			<!-- Divider -->
+			<p class="divider-text">
+			  <span class=""></span>
+			</p>
+			<!-- End divider-->			
+
+			<div class="row">
+				<div class="col-md-12 mx-auto">
+				<p class="text-center small <% if (data.saved=='Guardado') {%> text-primary <%} else {%> text-muted <%}%> "><%=data.saved%></p>
+				</div>
+			</div>
+			<!-- form start-->
+			<form id="main_form" class="needs-validation" autocomplete="off" novalidate>
 			<div class="row">
 				<!-- Input cantidad-->
 				<div id='div_cantidad' class="form-group input-group col">
@@ -100,18 +107,17 @@
 				</div> 
 				<!-- end Cantidad -->
 				
-				<!-- Input concepto-->
-				<div id='div_concepto' class="form-group input-group col">
-					<input type="search" id="concepto" class="form-control" value="<%=data.datos.concepto%>" <% if(!data.habilitado){ %> disabled <% }%> list="list_conceptos">
+				<div id='div_concepto' class="form-group input-group col ui-widget">
+					<input id="concepto" class="form-control autocomplete" value="<%=data.datos.concepto%>" <% if(!data.habilitado){ %> disabled <% }%>>
 					<div class="col-md-12 mx-auto">
 						<h6 class="text-center small text-info">Concepto</h6>
 					</div>
 					<div id="lbConcepto_invalid" class="invalid-feedback">
 						Agregar concepto
 					</div>
-					</div> <!-- end concepto -->
-			</div>
-			
+					</div> 
+				</div>
+
 			<!-- Input predial-->
 			<div id='div_predial' class="form-group input-group">
 				<div class="input-group-prepend">
@@ -122,7 +128,7 @@
 				  </span>
 				</div>
   
-				<input type="search" id="predio" value="<%=data.datos.predio%>" <% if(!data.habilitado){ %> disabled <% }%> class="form-control" list="list_predio">
+				<input id="predio" value="<%=data.datos.predio%>" <% if(!data.habilitado){ %> disabled <% }%> class="form-control">
 				<div class="col-md-12 mx-auto">
 				  <h6 class="text-center small text-info">Predio</h6>
 			  </div>
@@ -134,13 +140,7 @@
 			<!-- bt submit-->
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary btn-block" <% if(!data.habilitado){ %> disabled <% }%> > Guardar </button>
-			</div> <!-- form-group// -->       
-			<a href="/logout" class="nav-link font-italic bg-white text-dark text-center">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
-					<path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-				</svg>
-				  Cerrar sessión
-			  </a>                                                                 
+			</div> <!-- form-group// -->                                                                     
 		  </form>
 		  </article>
 		  </div> <!-- card.// -->
@@ -148,23 +148,7 @@
 		<!--container end.//-->
 		</div>
 	  </div>
-	  
-	<!-- Lista sugerencias concepto y predio -->
-	<datalist id="list_conceptos">
-		<%conceptos.forEach(c => { %>
-			<option value="<%=c%>">
-		<%}); %>
-	</datalist>
-	<datalist id="list_predio">
-		<%predios.forEach(p => { %>
-			<option value="<%=p%>">
-		<%}); %>
-	</datalist>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-	<script src="/vendor/js/mobile_menu.js"></script>
-
+	
 	<script src="/js/user_panel.js"></script>
 </body>
 </html>

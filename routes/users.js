@@ -17,18 +17,26 @@ function isValidDate(dateString) {
 	return d.toISOString().slice(0,10) === dateString;
 }
 
+//send conceptos and predios
+router.get('/conceptos_predios',(req,res)=>{
+	data={conceptos:config_form.getConceptos(),predios:config_form.getPredios()}
+	res.send(data)
+});
+
+
 router.get('/:p_date',(req,res)=>{
 	//validate day
 	if(isValidDate(req.params.p_date)){
-		if(req.isAuthenticated()){ //Validate role 
-			if(req.user['role']==config_role.User){ 
+		if(true){ //Validate role 
+			if(true){ 
 				let date=req.params.p_date;
 				datos_defualt={
 					fecha:date,
 					habilitado:true,
 					saved:'Sin guardar',
 					datos:{
-						nombre:req.user.nombre,
+						nombre:"p",
+						//nombre:req.user.nombre,
 						concepto:'',
 						cantidad:1,
 						id_concepto:'',
@@ -40,9 +48,9 @@ router.get('/:p_date',(req,res)=>{
 				Fechadb.findOne({usuario:'tb1',fecha:(date.toString())}).exec((err,resDate)=>{
 					if(resDate) {
 						resDate['saved']='Guardado';
-						res.render('usuario_panel',{data:resDate,conceptos:config_form.getConceptos(),predios:config_form.getPredios()});
+						res.render('usuario_panel',{data:resDate});
 					}else{
-						res.render('usuario_panel',{data:datos_defualt,conceptos:config_form.getConceptos(),predios:config_form.getPredios()});
+						res.render('usuario_panel',{data:datos_defualt});
 					} 
 					})
 				//enviar pagina

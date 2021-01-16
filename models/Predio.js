@@ -12,8 +12,12 @@ const UserSchema  = new mongoose.Schema({
 	Activo :{
 		type  : String,
 		required : true
+	},
+	Busqueda :{
+		type  : String,
+		required : true
 	}
 });
-const Predio= mongoose.model('Predio',UserSchema);
+const Predio= mongoose.model('predios',UserSchema);
 
 module.exports = Predio;

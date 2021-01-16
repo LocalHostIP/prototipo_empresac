@@ -25,6 +25,6 @@ const UserSchema  = new mongoose.Schema({
 		required: true	
 	}
 });
-const Fechadb= mongoose.model('Fechadb',UserSchema);
+const Fechadb= mongoose.model('fechadb',UserSchema);
 
 module.exports = Fechadb;

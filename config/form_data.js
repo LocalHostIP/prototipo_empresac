@@ -5,8 +5,8 @@ const Prediodb = require("../models/Predio.js")
 prediosdb=[];
 conceptosdb=[];
 
-var predios=[]; //Descriptions only
-var conceptos=[]; //Descriptions only
+var predios=[]; //Busqueda only
+var conceptos=[]; //Busqueda only
 
 function actualizar(){
 	//actualiza conceptos y predios de la base de datos
@@ -16,17 +16,18 @@ function actualizar(){
 	conceptosdb=[];
 	Conceptodb.find({}, function(err,res_conceptos) {	
 		res_conceptos.forEach(function(res_concepto) {
-			conceptos.push(res_concepto.Descripcion);
+			conceptos.push(res_concepto.Busqueda);
 			conceptosdb.push(res_concepto)
 		});	
 	  });
 
 	  Prediodb.find({}, function(err,res_predios) {	
 		res_predios.forEach(function(res_predio) {
-			predios.push(res_predio.Descripcion);
+			predios.push(res_predio.Busqueda);
 			prediosdb.push(res_predio)
 		});	
 	  });
+	
 }
 
 function getConceptos(){
@@ -36,14 +37,14 @@ function getPredios(){
 	return predios;
 }
 
-function findConceptoID(descripcion){
+function findConceptoID(busqueda){
 	return conceptosdb.find(function(e) {
-		return e.Descripcion == descripcion
+		return e.Busqueda == busqueda
 	  }).IdConcepto;
 }
-function findPredioID(descripcion){
+function findPredioID(busqueda){
 	return prediosdb.find(function(e) {
-		return e.Descripcion == descripcion
+		return e.Busqueda == busqueda
 	  }).IdElemento
 }
 

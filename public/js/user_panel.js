@@ -1,11 +1,4 @@
 
-//Scroll to div_date
-var posicion = $("#div_date").offset().top;
-$("html, body").animate({
-	scrollTop: posicion
-}, 1000); 
-
-
 //validates day format
 function isValidDate(dateString) {
 	var regEx = /^\d{4}-\d{2}-\d{2}$/;
@@ -47,6 +40,7 @@ $( "#main_form" ).submit(function( event ) {
 				predio: predio,
 			}, // data recive un objeto con la informacion que se enviara al servidor
 			success:function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
+				console.log(datos)
 				let type_errors=[]
 				let msgs=[]
 				//check server messages
@@ -142,3 +136,26 @@ $( document ).ready(function() {
 	var datetime = new Date();
 	$("#date").prop('max',datetime.toISOString().slice(0,10));
 });
+
+
+//Conceptos 
+var conceptos = [];
+
+$( function() {
+	//Get conceptos and predios from server request
+	$.ajax({
+		type:"GET", 
+		url:"/users/conceptos_predios", 
+		data:{},
+		success:function(data){ 
+			$( "#concepto" ).autocomplete({
+				source: data.conceptos
+			});
+			$( "#predio" ).autocomplete({
+				source: data.predios
+			});
+		},
+		dataType: 'json' 
+	})
+
+} );
