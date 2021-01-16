@@ -1,7 +1,7 @@
 //Concepto database structure
 const mongoose = require('mongoose');
 const UserSchema  = new mongoose.Schema({
-    IdElemento :{
+    Id_Elemento :{
 	  	type  : String,
 	  	required : true
   	},
@@ -10,10 +10,6 @@ const UserSchema  = new mongoose.Schema({
 		required : true
 	},
 	Activo :{
-		type  : String,
-		required : true
-	},
-	Busqueda :{
 		type  : String,
 		required : true
 	}

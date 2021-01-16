@@ -16,14 +16,13 @@ function actualizar(){
 	conceptosdb=[];
 	Conceptodb.find({}, function(err,res_conceptos) {	
 		res_conceptos.forEach(function(res_concepto) {
-			conceptos.push(res_concepto.Busqueda);
+			conceptos.push(res_concepto.IdConcepto+" "+res_concepto.Descripcion);
 			conceptosdb.push(res_concepto)
 		});	
 	  });
-
 	  Prediodb.find({}, function(err,res_predios) {	
 		res_predios.forEach(function(res_predio) {
-			predios.push(res_predio.Busqueda);
+			predios.push(res_predio.Id_Elemento+" "+res_predio.Descripcion);
 			prediosdb.push(res_predio)
 		});	
 	  });
@@ -39,13 +38,13 @@ function getPredios(){
 
 function findConceptoID(busqueda){
 	return conceptosdb.find(function(e) {
-		return e.Busqueda == busqueda
+		return e.IdConcepto+" "+e.Descripcion == busqueda
 	  }).IdConcepto;
 }
 function findPredioID(busqueda){
 	return prediosdb.find(function(e) {
-		return e.Busqueda == busqueda
-	  }).IdElemento
+		return e.Id_Elemento+" "+e.Descripcion == busqueda
+	  }).Id_Elemento
 }
 
 module.exports={

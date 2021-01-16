@@ -28,10 +28,6 @@ const UserSchema  = new mongoose.Schema({
 	Substituye :{
 		type  : String,
 		required : true
-	},
-	Busqueda :{
-		type  : String,
-		required : true
 	}
 });
 const Concepto= mongoose.model('conceptos',UserSchema);
