@@ -53,7 +53,8 @@
 					</svg></span>
 				</div>
 	
-				<input type="text" id="nombre" class="form-control" placeholder="Nombre completo" type="text"  value="<%=data.datos.nombre%>" required disabled>
+				<input type="text" id="nombre" class="form-control" placeholder="Nombre completo" type="text"  
+				value="<%=data.nombre%>" required disabled>
 
 				<div id="lbNombre_invalid" class="invalid-feedback">
 					Colorcar el nombre
@@ -79,153 +80,152 @@
 			</div>	
 			 <!-- end input fecha -->
 
-			<!-- Divider -->
-			<p class="divider-text">
-			  <span class=""></span>
-			</p>
-			<!-- End divider-->			
-
-			<!-- saved text -->
-			<div class="row">
-				<div class="col-md-12 mx-auto">
-				<p class="text-center small <% if (data.saved=='Guardado') {%> text-primary <%} else {%> text-muted <%}%> "><%=data.saved%></p>
-				</div>
-			</div>
-			<!-- end saved text -->
-
-			<!-- form start-->
-			<form id="main_form" class="needs-validation" autocomplete="off" novalidate>
-	
-				<!-- Input cantidad and concepto-->
-				<div class="row">
-					<!-- Input cantidad -->
-					<div id='div_cantidad' class="form-group input-group col">
-						<div class="input-group-prepend">
-							<div class="input-group-prepend">
-								<span class="input-group-text"> 
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hexagon-fill" viewBox="0 0 16 16">
-										<path fill-rule="evenodd" d="M8.5.134a1 1 0 0 0-1 0l-6 3.577a1 1 0 0 0-.5.866v6.846a1 1 0 0 0 .5.866l6 3.577a1 1 0 0 0 1 0l6-3.577a1 1 0 0 0 .5-.866V4.577a1 1 0 0 0-.5-.866L8.5.134z"/>
-									</svg>
-								</span>
-							</div>
-						</div>
-						<input type="number" id="cantidad" class="form-control" placeholder="Cantidad" <% if(!data.habilitado){ %> disabled <% }%> value="<%=data.datos.cantidad%>" min="0" max="200" step="1" type="text" required>
-						<div class="col-md-12 mx-auto">
-							<h6 class="text-center small text-info">Cantidad</h6>
-						</div>
-						<div id="lbCantidad_invalid" class="invalid-feedback">
-							Agregar cantidad
-						</div>
-					</div> 
-					<!-- end Cantidad -->
-				
-					<!-- Input concepto -->
-					<div id='div_concepto' class="form-group input-group col ui-widget">
-					<input id="concepto" class="form-control autocomplete" value="<%=data.datos.concepto%>" <% if(!data.habilitado){ %> disabled <% }%>>
-					<div class="col-md-12 mx-auto">
-						<h6 class="text-center small text-info">Concepto</h6>
-					</div>
-					<div id="lbConcepto_invalid" class="invalid-feedback">
-						Agregar concepto
-					</div>
-					</div> 
-					<!-- Input end concepto -->
-				</div>
-				<!-- end concepto y cantidad -->
-
-			<!-- Input predial-->
-			<div id='div_predial' class="form-group input-group">
-				<div class="input-group-prepend">
-				  <span class="input-group-text"> 
-					<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-square-fill" viewBox="0 0 16 16">
-						<path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
-					  </svg>
-				  </span>
-				</div>
-  
-				<input id="predio" value="<%=data.datos.predio%>" <% if(!data.habilitado){ %> disabled <% }%> class="form-control">
-				<div class="col-md-12 mx-auto">
-				  <h6 class="text-center small text-info">Predio</h6>
-				</div>
-				<div id="lbPredio_invalid" class="invalid-feedback">
-					Agregar predio
-				</div>
-			</div> 
-			<!-- end predial -->
-
-			<!-- bt submit-->
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary btn-block" <% if(!data.habilitado){ %> disabled <% }%> > Guardar </button>
-			</div> <!-- form-group// -->                                                                     
-			</form>
-
+			<div class="bg-light">
 			<!-- Divider -->
 			<p class="divider-text">
 				<span class=""></span>
-			</p>
-			<!-- End divider-->		
-
+			  </p>
+			  <!-- End divider-->			
+  
+			  <!-- form start-->
+			  <form id="main_form" class="needs-validation bg-light" autocomplete="off" novalidate>
+  
+				  <!-- Input cantidad and concepto-->
+				  <div class="row">
+					  <!-- Input cantidad -->
+					  <div id='div_cantidad' class="form-group input-group col">
+						  <div class="input-group-prepend">
+							  <div class="input-group-prepend">
+								  <span class="input-group-text"> 
+									  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hexagon-fill" viewBox="0 0 16 16">
+										  <path fill-rule="evenodd" d="M8.5.134a1 1 0 0 0-1 0l-6 3.577a1 1 0 0 0-.5.866v6.846a1 1 0 0 0 .5.866l6 3.577a1 1 0 0 0 1 0l6-3.577a1 1 0 0 0 .5-.866V4.577a1 1 0 0 0-.5-.866L8.5.134z"/>
+									  </svg>
+								  </span>
+							  </div>
+						  </div>
+						  <input type="number" id="cantidad" class="form-control" placeholder="#" value="" min="0" max="200" step="1" type="text" required>
+						  <div class="col-md-12 mx-auto">
+							  <h6 class="text-center small text-info">Cantidad</h6>
+						  </div>
+						  <div id="lbCantidad_invalid" class="invalid-feedback">
+							  Agregar cantidad
+						  </div>
+					  </div> 
+					  <!-- end Cantidad -->
+				  
+					  <!-- Input concepto -->
+					  <div id='div_concepto' class="form-group input-group col ui-widget">
+					  <input id="concepto" class="form-control autocomplete" value="">
+					  <div class="col-md-12 mx-auto">
+						  <h6 class="text-center small text-info">Concepto</h6>
+					  </div>
+					  <div id="lbConcepto_invalid" class="invalid-feedback">
+						  Agregar concepto
+					  </div>
+					  </div> 
+					  <!-- Input end concepto -->
+				  </div>
+				  <!-- end concepto y cantidad -->
+  
+			  <!-- Input predial-->
+			  <div id='div_predial' class="form-group input-group">
+				  <div class="input-group-prepend">
+					<span class="input-group-text"> 
+					  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-square-fill" viewBox="0 0 16 16">
+						  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+						</svg>
+					</span>
+				  </div>
+	
+				  <input id="predio" value="" class="form-control">
+				  <div class="col-md-12 mx-auto">
+					<h6 class="text-center small text-info">Predio</h6>
+				  </div>
+				  <div id="lbPredio_invalid" class="invalid-feedback">
+					  Agregar predio
+				  </div>
+			  </div> 
+			  <!-- end predial -->
+  
+			  <!-- bt submit-->
+			  <div class="form-group">
+				  <button type="submit" class="btn btn-primary btn-block" > Agregar </button>
+			  </div> <!-- form-group// -->                                                                     
+			  </form>
+  
+			  <!-- Divider -->
+			  <p class="divider-text">
+				  <span class=""></span>
+			  </p>
+			  <!-- End divider-->		
+			</div>
+			<br>
 			<!-- Registros  -->
 			<div>
-				
-			<div class="row">
-			<div class="col-12">
-				<table class="table table-bordered  bg-light">
-				<tbody>
-					<tr>
-						<td class="text-center bg-inputspan">				
-							<span> 
-								<svg class="text-dark" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-hash" viewBox="0 0 16 16">
-									<path d="M8.39 12.648a1.32 1.32 0 0 0-.015.18c0 .305.21.508.5.508.266 0 .492-.172.555-.477l.554-2.703h1.204c.421 0 .617-.234.617-.547 0-.312-.188-.53-.617-.53h-.985l.516-2.524h1.265c.43 0 .618-.227.618-.547 0-.313-.188-.524-.618-.524h-1.046l.476-2.304a1.06 1.06 0 0 0 .016-.164.51.51 0 0 0-.516-.516.54.54 0 0 0-.539.43l-.523 2.554H7.617l.477-2.304c.008-.04.015-.118.015-.164a.512.512 0 0 0-.523-.516.539.539 0 0 0-.531.43L6.53 5.484H5.414c-.43 0-.617.22-.617.532 0 .312.187.539.617.539h.906l-.515 2.523H4.609c-.421 0-.609.219-.609.531 0 .313.188.547.61.547h.976l-.516 2.492c-.008.04-.015.125-.015.18 0 .305.21.508.5.508.265 0 .492-.172.554-.477l.555-2.703h2.242l-.515 2.492zm-1-6.109h2.266l-.515 2.563H6.859l.532-2.563z"/>
-									</svg>
-							</span>
-						</td>
-						<td>11</td>
-					</tr>
-					<tr>
-						<td class="text-center bg-inputspan">				
-							<span> 
-								<svg class="text-dark" xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-hexagon-fill" viewBox="0 0 16 16">
-									<path fill-rule="evenodd" d="M8.5.134a1 1 0 0 0-1 0l-6 3.577a1 1 0 0 0-.5.866v6.846a1 1 0 0 0 .5.866l6 3.577a1 1 0 0 0 1 0l6-3.577a1 1 0 0 0 .5-.866V4.577a1 1 0 0 0-.5-.866L8.5.134z"/>
-								</svg>
-							</span>
-						</td>
-						<td>Concepto prueba 1 akjsdfhaksjldfhlakjsdhflkasjd</td>
-					</tr>
-					<tr>
-						<td class="text-center bg-inputspan">				
-							<span> 
-								<svg class="text-dark" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-square-fill" viewBox="0 0 16 16">
-									<path	 d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
-								</svg>
-							</span>
-						</td>
-						<td>Predio prueba 1</td>
-					</tr>
-					<tr>
-						<td colspan="2">
-							<div class="row">
-								<div class="col d-flex justify-content-center">
-									<div>
-										<svg id="delete-1" class="bg-trash" xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-											<path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+			<%if(data.saved=="Sin guardar"){%>
+				<p class="text-muted text-center">Sin registros</p>
+			<%}%> 
+			<% for(r of data.datos){%>
+				<div class="row">
+					<div class="col-12">
+						<table class="table table-bordered  bg-light">
+						<tbody>
+							<tr>
+								<td class="text-center bg-inputspan">				
+									<span> 
+										<svg class="text-dark" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-hash" viewBox="0 0 16 16">
+											<path d="M8.39 12.648a1.32 1.32 0 0 0-.015.18c0 .305.21.508.5.508.266 0 .492-.172.555-.477l.554-2.703h1.204c.421 0 .617-.234.617-.547 0-.312-.188-.53-.617-.53h-.985l.516-2.524h1.265c.43 0 .618-.227.618-.547 0-.313-.188-.524-.618-.524h-1.046l.476-2.304a1.06 1.06 0 0 0 .016-.164.51.51 0 0 0-.516-.516.54.54 0 0 0-.539.43l-.523 2.554H7.617l.477-2.304c.008-.04.015-.118.015-.164a.512.512 0 0 0-.523-.516.539.539 0 0 0-.531.43L6.53 5.484H5.414c-.43 0-.617.22-.617.532 0 .312.187.539.617.539h.906l-.515 2.523H4.609c-.421 0-.609.219-.609.531 0 .313.188.547.61.547h.976l-.516 2.492c-.008.04-.015.125-.015.18 0 .305.21.508.5.508.265 0 .492-.172.554-.477l.555-2.703h2.242l-.515 2.492zm-1-6.109h2.266l-.515 2.563H6.859l.532-2.563z"/>
+											</svg>
+									</span>
+								</td>
+								<td><%=r.cantidad%></td>
+							</tr>
+							<tr>
+								<td class="text-center bg-inputspan">				
+									<span> 
+										<svg class="text-dark" xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" class="bi bi-hexagon-fill" viewBox="0 0 16 16">
+											<path fill-rule="evenodd" d="M8.5.134a1 1 0 0 0-1 0l-6 3.577a1 1 0 0 0-.5.866v6.846a1 1 0 0 0 .5.866l6 3.577a1 1 0 0 0 1 0l6-3.577a1 1 0 0 0 .5-.866V4.577a1 1 0 0 0-.5-.866L8.5.134z"/>
 										</svg>
-									</div>
-								</div>
-								<div class="col d-flex justify-content-center">
-									<div>
-										<svg id="delete-2" class="text-primary" xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-											<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+									</span>
+								</td>
+								<td><%=r.concepto%></td>
+							</tr>
+							<tr>
+								<td class="text-center bg-inputspan">				
+									<span> 
+										<svg class="text-dark" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-square-fill" viewBox="0 0 16 16">
+											<path	 d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
 										</svg>
+									</span>
+								</td>
+								<td><%=r.predio%></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div class="row">
+										<div class="col d-flex justify-content-center">
+											<div>
+												<svg id="delete-1" class="bg-trash" xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+													<path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+												</svg>
+											</div>
+										</div>
+										<div class="col d-flex justify-content-center">
+											<div>
+												<svg id="delete-2" class="text-primary" xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+													<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+												</svg>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-				</table>
-			</div>
-			</div>
+								</td>
+							</tr>
+						</tbody>
+						</table>
+					</div>
+					</div>				
+			<%}%> 
+
 			</div>	
 			<!-- end registros  -->
 

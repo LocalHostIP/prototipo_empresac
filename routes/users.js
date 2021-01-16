@@ -34,15 +34,7 @@ router.get('/:p_date',(req,res)=>{
 					fecha:date,
 					habilitado:true,
 					saved:'Sin guardar',
-					datos:{
-						nombre:"p",
-						//nombre:req.user.nombre,
-						concepto:'',
-						cantidad:1,
-						id_concepto:'',
-						predio:'',
-						id_elemento:'',
-					}
+					datos:[]
 				};
 				//Look for day on database 
 				Fechadb.findOne({usuario:'tb1',fecha:(date.toString())}).exec((err,resDate)=>{
@@ -54,7 +46,6 @@ router.get('/:p_date',(req,res)=>{
 					} 
 					})
 				//enviar pagina
-				
 			}else{
 				res.redirect('admin/');
 			}
@@ -69,8 +60,8 @@ router.get('/:p_date',(req,res)=>{
 router.post('/:p_date',(req,res)=>{
 	//validate day
 	if(isValidDate(req.params.p_date)){ 
-		if(req.isAuthenticated()){ //validate autentification
-			if(req.user['role']==config_role.User){ //Validate role 
+		if(true){ //validate autentification req.isAuthenticated()
+			if(true){ //Validate role  req.user['role']==config_role.User
 				//Look for day on database 
 				let newDay = {};
 				let respuesta=[]
