@@ -9,6 +9,9 @@ function isValidDate(dateString) {
 	return d.toISOString().slice(0,10) === dateString;
 }
 
+//when its a new register its value is -1, otherwise is the index to modify
+index_edit=-1;
+
 //validate inputs
 $( "#main_form" ).submit(function( event ) {
 	validPost=true;
@@ -30,15 +33,23 @@ $( "#main_form" ).submit(function( event ) {
 		validPost=false;
 	}
 
+	//edit or add new url
+	let url="/users/"+date;
+	data={
+		concepto : concepto,
+		cantidad: cantidad,
+		predio: predio,
+	}
+	if(index_edit!=-1){
+		url="/users/edit/"+date;
+		data['index']=index_edit;
+	}
+
 	if (validPost){
 		$.ajax({
 			type:"POST", 
-			url:"/users/"+date, //url guarda la ruta hacia donde se hace la peticion
-			data:{
-				concepto : concepto,
-				cantidad: cantidad,
-				predio: predio,
-			}, // data recive un objeto con la informacion que se enviara al servidor
+			url:url, //url guarda la ruta hacia donde se hace la peticion
+			data:data, // data recive un objeto con la informacion que se enviara al servidor
 			success:function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
 				console.log(datos)
 				let type_errors=[]
@@ -159,6 +170,30 @@ function deleteRegister(index){
 		dataType: 'json' 
 	})
 }
+
+//Edit register
+function editRegister(index){
+	//Change button and use 
+	$('#btn_submit').html('Actualizar')
+	$("#concepto").val($("#concepto"+index).html());
+	$("#cantidad").val($("#cantidad"+index).html());
+	$("#predio").val($("#predio"+index).html());
+	$('#btn_cancel').css("display","block");
+	index_edit=index;
+
+	//Scroll to form
+	$("body,html").animate(
+		{
+		  scrollTop: $("body").offset().top
+		},
+		500 //speed
+	  );
+}
+
+//Btn cancelar
+$('#btn_cancel').click(function(){
+	location.reload();
+})
 
 $( function() {
 	//Get conceptos and predios from server request
