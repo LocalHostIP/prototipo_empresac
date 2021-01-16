@@ -56,6 +56,47 @@ router.get('/:p_date',(req,res)=>{
 		res.render('errorPage');
 	}
 });
+router.post('/delete/:p_date',(req,res)=>{
+	//validate day
+	if(isValidDate(req.params.p_date)){ 
+		if(true){ //validate autentification req.isAuthenticated()
+			if(true){ //Validate role  req.user['role']==config_role.User
+				const {index} = req.body; 
+				let date=req.params.p_date;
+				let respuesta=[]
+				//Finding an existing date
+				Fechadb.findOne({usuario:'tb1',fecha:(date.toString())}).exec((err,resDate)=>{
+					if(resDate) {
+						newDay=resDate;
+						newDay.datos.splice(index,1)
+					}
+					else {
+						res.send({msgtype:271,msg:'Registro no encontrada'})
+					}
+					//save date
+					newDay.save()
+					.then((value)=>{
+						respuesta.push({msgtype:100,msg:'Guardado correctamente'})
+						res.send(respuesta)
+					})
+					.catch(value=> { //Error on saving on database
+						console.log(value)
+						respuesta.push({msgtype:270,msg:'Error en la base de datos'})
+						res.send(respuesta)
+					});
+				});
+				
+				//---------------------------------------
+			}else{
+				res.send({msgtype:250,msg:'No autentificado como usuario'})
+			}
+		}else{
+			res.send({msgtype:250,msg:'No autentificado como usuario'});
+		}
+	}else{
+		res.send({msgtype:202,msg:"Fecha invalida"});
+	}
+});
 
 router.post('/:p_date',(req,res)=>{
 	//validate day
@@ -95,28 +136,28 @@ router.post('/:p_date',(req,res)=>{
 					Fechadb.findOne({usuario:'tb1',fecha:(date.toString())}).exec((err,resDate)=>{
 						if(resDate) {
 							newDay=resDate;
-							newDay.datos={
-								nombre:req.user.nombre,
+							newDay.datos.push({
 								concepto:concepto,
 								cantidad:cantidad,
 								id_concepto:config_form.findConceptoID(concepto),
 								id_elemento:config_form.findPredioID(predio),
 								predio:predio
-							}
+							})
 						}
 						else {
 							newDay = new Fechadb({
 								fecha : date,
 								usuario : 'tb1',
 								habilitado:true,
-								datos:{
-									nombre:req.user.nombre,
+								//nombre:req.user.nombre,
+								nombre:"Nombre prueba",
+								datos:[{
 									concepto:concepto,
 									cantidad:cantidad,
 									id_concepto:config_form.findConceptoID(concepto),
 									id_elemento:config_form.findPredioID(predio),
 									predio:predio
-								}
+								}]
 							});
 						}
 						//save date

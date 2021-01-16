@@ -14,17 +14,10 @@ const UserSchema  = new mongoose.Schema({
 		required : true
 	} ,
 	datos:{
-		type:{
-			nombre:{type: String, required: true},
-			concepto:{type: String, required: true},
-			id_concepto:{type: String, required: true},
-			predio:{type: String, required: true},
-			id_elemento:{type: String, required: true},
-			cantidad:{type: Number, required: true},
-		},
+		type:[],
 		required: true	
 	}
 });
-const Fechadb= mongoose.model('fechadb',UserSchema);
+const Fechadb= mongoose.model('fechadbs',UserSchema);
 
 module.exports = Fechadb;

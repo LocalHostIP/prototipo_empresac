@@ -48,11 +48,11 @@ $( "#main_form" ).submit(function( event ) {
 					type_errors.push(datos[i].msgtype)
 					msgs.push(datos[i].msg)
 				}     
+				refreshInputs(msgs)
 
 				if(type_errors.includes(100)){ //Fecha registrada cone exito
 					location.reload();
 				}	
-				refreshInputs(msgs)
 			},
 			dataType: 'json' 
 		})
@@ -94,7 +94,6 @@ function refreshInputs(errors){
 	div_cantidad=$('#div_cantidad')
 	lb_cantidad=$('#lbCantidad_invalid')
 
-	makeInputValid(date,div_date,lb_date,true,"") 
 	makeInputValid(concepto,div_concepto,lb_concepto,true,"") 
 	makeInputValid(predio,div_predio,lb_predio,true,"") 
 	makeInputValid(cantidad,div_cantidad,lb_cantidad,true,"") 
@@ -107,6 +106,7 @@ function refreshInputs(errors){
 	}
 	if(errors.includes('Cantidad invalida')){
 		makeInputValid(cantidad,div_cantidad,lb_cantidad,false,'Cantidad invalida')
+		cantidad.val('0');
 	}
 	if(errors.includes('Fecha invalida')){
 		makeInputValid(fecha,div_cantidad,lb_cantidad,false,'Fecha invalida')
@@ -120,6 +120,7 @@ function refreshInputs(errors){
 	}
 	if(errors.includes('Cantidad vacio')){
 		makeInputValid(cantidad,div_cantidad,lb_cantidad,false,'Agregue la cantidad')
+		cantidad.val('0');
 	}
 	if(errors.includes('Fecha vacio')){
 		makeInputValid(fecha,div_cantidad,lb_cantidad,false,'Agregue la fecha')
@@ -131,15 +132,33 @@ $('#date').change(function(){
 	window.location.href = '/users/'+$('#date').val(); //one level up
 })
 
-//Date picker disable days
-$( document ).ready(function() {
-	var datetime = new Date();
-	$("#date").prop('max',datetime.toISOString().slice(0,10));
-});
+//Delete register
+function deleteRegister(index){
+	//delets register by index
+	$.ajax({
+		type:"POST", 
+		url:"/users/delete/"+$('#date').val(), //url guarda la ruta hacia donde se hace la peticion
+		data:{
+			index:index
+		}, // data recive un objeto con la informacion que se enviara al servidor
+		success:function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
+			console.log(datos)
+			let type_errors=[]
+			let msgs=[]
+			//check server messages
+			for (i=0;i<datos.length;i+=1){			
+				type_errors.push(datos[i].msgtype)
+				msgs.push(datos[i].msg)
+			}     
 
+			if(type_errors.includes(100)){ //Fecha eliminada con exito
+				location.reload();
+			}	
 
-//Conceptos 
-var conceptos = [];
+		},
+		dataType: 'json' 
+	})
+}
 
 $( function() {
 	//Get conceptos and predios from server request
