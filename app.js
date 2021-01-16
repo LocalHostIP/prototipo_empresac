@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 const app=express();	
 const db_config = require('./config/db.js')
 var favicon = require('serve-favicon');
-
 //Configure mongoos's promise to global promise
 mongoose.promise = global.Promise;
 mongoose.connect(db_config.url,{useNewUrlParser: true, useUnifiedTopology : true})

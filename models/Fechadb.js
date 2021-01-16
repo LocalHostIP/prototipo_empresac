@@ -9,6 +9,10 @@ const UserSchema  = new mongoose.Schema({
 		type  : String,
 		required : true
 	} ,
+	nombre :{
+		type  : String,
+		required : true
+	} ,
 	habilitado :{
 		type  : Boolean,
 		required : true

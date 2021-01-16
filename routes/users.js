@@ -23,21 +23,21 @@ router.get('/conceptos_predios',(req,res)=>{
 	res.send(data)
 });
 
-
 router.get('/:p_date',(req,res)=>{
 	//validate day
 	if(isValidDate(req.params.p_date)){
-		if(true){ //Validate role 
-			if(true){ 
+		if(req.isAuthenticated()){ //Validate role 
+			if(req.user['role']==config_role.User){ 
 				let date=req.params.p_date;
 				datos_defualt={
 					fecha:date,
 					habilitado:true,
 					saved:'Sin guardar',
+					nombre:req.user.nombre,
 					datos:[]
 				};
 				//Look for day on database 
-				Fechadb.findOne({usuario:'tb1',fecha:(date.toString())}).exec((err,resDate)=>{
+				Fechadb.findOne({usuario:req.user.usuario,fecha:(date.toString())}).exec((err,resDate)=>{
 					if(resDate) {
 						resDate['saved']='Guardado';
 						res.render('usuario_panel',{data:resDate});
@@ -59,13 +59,13 @@ router.get('/:p_date',(req,res)=>{
 router.post('/delete/:p_date',(req,res)=>{
 	//validate day
 	if(isValidDate(req.params.p_date)){ 
-		if(true){ //validate autentification req.isAuthenticated()
-			if(true){ //Validate role  req.user['role']==config_role.User
+		if(req.isAuthenticated()){ //validate autentification 
+			if(req.user['role']==config_role.User){ //Validate role  
 				const {index} = req.body; 
 				let date=req.params.p_date;
 				let respuesta=[]
 				//Finding an existing date
-				Fechadb.findOne({usuario:'tb1',fecha:(date.toString())}).exec((err,resDate)=>{
+				Fechadb.findOne({usuario:req.user.usuario,fecha:(date.toString())}).exec((err,resDate)=>{
 					if(resDate) {
 						newDay=resDate;
 						newDay.datos.splice(index,1)
@@ -101,12 +101,11 @@ router.post('/delete/:p_date',(req,res)=>{
 router.post('/edit/:p_date',(req,res)=>{
 	//validate day
 	if(isValidDate(req.params.p_date)){ 
-		if(true){ //validate autentification req.isAuthenticated()
-			if(true){ //Validate role  req.user['role']==config_role.User
+		if(req.isAuthenticated()){ //validate autentification 
+			if(req.user['role']==config_role.User){ //Validate role  
 				//Look for day on database 
 				let newDay = {};
 				let respuesta=[]
-
 				//validate data
 				const {concepto,cantidad,predio,index} = req.body; 
 				let date=req.params.p_date;
@@ -134,7 +133,7 @@ router.post('/edit/:p_date',(req,res)=>{
 				//Finding an existing date
 
 
-					Fechadb.findOneAndUpdate({usuario:'tb1',fecha:(date.toString())}).exec((err,resDate)=>{
+					Fechadb.findOne({usuario:req.user.usuario,fecha:(date.toString())}).exec((err,resDate)=>{
 						if(resDate) {
 							newDay=resDate;
 							if(index<newDay.datos.length){
@@ -151,14 +150,12 @@ router.post('/edit/:p_date',(req,res)=>{
 							res.send({msgtype:271,msg:'Registro no encontrada'})
 						}
 						//save date
-						Fechadb.replaceOne({usuario:'tb1',fecha:(date.toString())},newDay)
+						Fechadb.replaceOne({usuario:req.user.usuario,fecha:(date.toString())},newDay)
 						.then((value)=>{
-							console.log(value)
 							respuesta.push({msgtype:100,msg:'Guardado correctamente'})
 							res.send(respuesta)
 						})
 						.catch(value=> { //Error on saving on database
-							console.log(value)
 							respuesta.push({msgtype:270,msg:'Error en la base de datos'})
 							res.send(respuesta)
 						});
@@ -180,8 +177,8 @@ router.post('/edit/:p_date',(req,res)=>{
 router.post('/:p_date',(req,res)=>{
 	//validate day
 	if(isValidDate(req.params.p_date)){ 
-		if(true){ //validate autentification req.isAuthenticated()
-			if(true){ //Validate role  req.user['role']==config_role.User
+		if(req.isAuthenticated()){ //validate autentification req.isAuthenticated()
+			if(req.user['role']==config_role.User){ //Validate role  req.user['role']==config_role.User
 				//Look for day on database 
 				let newDay = {};
 				let respuesta=[]
@@ -212,7 +209,7 @@ router.post('/:p_date',(req,res)=>{
 					res.send(respuesta);
 				}else{ //Validation passed
 				//Finding an existing date
-					Fechadb.findOne({usuario:'tb1',fecha:(date.toString())}).exec((err,resDate)=>{
+					Fechadb.findOne({usuario:req.user.usuario,fecha:(date.toString())}).exec((err,resDate)=>{
 						if(resDate) {
 							newDay=resDate;
 							newDay.datos.push({
@@ -226,10 +223,9 @@ router.post('/:p_date',(req,res)=>{
 						else {
 							newDay = new Fechadb({
 								fecha : date,
-								usuario : 'tb1',
+								usuario : req.user.usuario,
+								nombre:req.user.nombre,
 								habilitado:true,
-								//nombre:req.user.nombre,
-								nombre:"Nombre prueba",
 								datos:[{
 									concepto:concepto,
 									cantidad:cantidad,
