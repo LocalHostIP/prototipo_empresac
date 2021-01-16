@@ -42,3 +42,15 @@
 #div_concepto{
     padding-left: 2px;
 }
+.bg-inputspan{
+    background-color: #e9ecef;
+}
+.bg-trash{
+    color :#ab352c;
+}
+#delete-1:hover{
+    opacity: 0.8;
+}
+#delete-2:hover{
+    opacity: 0.8;
+}
