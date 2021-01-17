@@ -26,18 +26,24 @@ router.get('/conceptos_predios',(req,res)=>{
 router.get('/:p_date',(req,res)=>{
 	//validate day
 	if(isValidDate(req.params.p_date)){
-		if(req.isAuthenticated()){ //Validate role 
-			if(req.user['role']==config_role.User){ 
+		if(req.isAuthenticated() || true){ //Validate role 
+			let user=req.user;
+			user={
+				role:'User',
+				nombre:'Trabajador 1',
+				usuario:'tb1'
+			}
+			if(user['role']==config_role.User){ 
 				let date=req.params.p_date;
 				datos_defualt={
 					fecha:date,
 					habilitado:true,
 					saved:'Sin guardar',
-					nombre:req.user.nombre,
+					nombre: user.nombre,
 					datos:[]
 				};
 				//Look for day on database 
-				Fechadb.findOne({usuario:req.user.usuario,fecha:(date.toString())}).exec((err,resDate)=>{
+				Fechadb.findOne({usuario:user.usuario,fecha:(date.toString())}).exec((err,resDate)=>{
 					if(resDate) {
 						resDate['saved']='Guardado';
 						res.render('usuario_panel',{data:resDate});
@@ -56,6 +62,9 @@ router.get('/:p_date',(req,res)=>{
 		res.render('errorPage');
 	}
 });
+
+//Posts
+
 router.post('/delete/:p_date',(req,res)=>{
 	//validate day
 	if(isValidDate(req.params.p_date)){ 
@@ -74,18 +83,30 @@ router.post('/delete/:p_date',(req,res)=>{
 						res.send({msgtype:271,msg:'Registro no encontrada'})
 					}
 					//save date
-					newDay.save()
-					.then((value)=>{
-						respuesta.push({msgtype:100,msg:'Guardado correctamente'})
-						res.send(respuesta)
-					})
-					.catch(value=> { //Error on saving on database
-						console.log(value)
-						respuesta.push({msgtype:270,msg:'Error en la base de datos'})
-						res.send(respuesta)
-					});
+					if(newDay.datos.length==0){
+						Fechadb.deleteOne({ usuario:req.user.usuario,fecha:(date.toString()) }, function (err) {
+							respuesta.push({msgtype:100,msg:'Guardado correctamente'})
+							res.send(respuesta)
+							if (err) {
+								console.log(value)
+								respuesta.push({msgtype:270,msg:'Error en la base de datos'})
+								res.send(respuesta)
+								return handleError(err);
+							}
+						  });
+					}else{
+						newDay.save()
+						.then((value)=>{
+							respuesta.push({msgtype:100,msg:'Guardado correctamente'})
+							res.send(respuesta)
+						})
+						.catch(value=> { //Error on saving on database
+							console.log(value)
+							respuesta.push({msgtype:270,msg:'Error en la base de datos'})
+							res.send(respuesta)
+						});
+					}
 				});
-				
 				//---------------------------------------
 			}else{
 				res.send({msgtype:250,msg:'No autentificado como usuario'})
