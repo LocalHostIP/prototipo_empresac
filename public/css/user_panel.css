@@ -47,9 +47,10 @@
 .bg-trash{
     color :#ab352c;
 }
-#delete-1:hover{
+.bt-edit:hover{
     opacity: 0.8;
+    
 }
-#delete-2:hover{
+.bt-delete:hover{
     opacity: 0.8;
 }
