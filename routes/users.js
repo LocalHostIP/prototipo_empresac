@@ -26,13 +26,13 @@ router.get('/conceptos_predios',(req,res)=>{
 router.get('/:p_date',(req,res)=>{
 	//validate day
 	if(isValidDate(req.params.p_date)){
-		if(req.isAuthenticated() || true){ //Validate role 
+		if(req.isAuthenticated()){ //Validate role 
 			let user=req.user;
-			user={
-				role:'User',
-				nombre:'Trabajador 1',
-				usuario:'tb1'
-			}
+			// user={
+			// 	role:'User',
+			// 	nombre:'Trabajador 1',
+			// 	usuario:'tb1'
+			// }
 			if(user['role']==config_role.User){ 
 				let date=req.params.p_date;
 				datos_defualt={
@@ -193,7 +193,6 @@ router.post('/edit/:p_date',(req,res)=>{
 		res.send({msgtype:202,msg:"Fecha invalida"});
 	}
 });
-
 
 router.post('/:p_date',(req,res)=>{
 	//validate day
