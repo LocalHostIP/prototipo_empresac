@@ -101,8 +101,6 @@ function getWeekDescription(){
 			let today=new Date().toISOString().slice(0,10);
 			for(i=0;i<7;i++){
 				$('#des'+i).html(datos[i]);
-				if(datos[i]!='--')
-					$('#des'+i).html(datos[i]+'hrs');
 				if(week[i].toISOString().slice(0,10)<today && datos[i]=='--'){
 					$("#des"+i).addClass('day-nofilled');
 					$("#day"+i).addClass('day-nofilled');
