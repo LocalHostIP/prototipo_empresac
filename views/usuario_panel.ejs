@@ -72,8 +72,8 @@
 
 			<!-- date picker -->
 			<div class="row my-0 py-0">
-				<div class='datepicker my-0 py-0 col-sm-12 col-12 mx-auto'>
-					<div class="month">
+				<div class='datepicker my-0 py-0 col-sm-12 col-12 mx-auto '>
+					<div class="month shadow-sm">
 						<ul>
 							<li id="prev-week" class="prev">&#10094;</li>
 							<li id="next-week" class="next">&#10095;</li>
@@ -81,7 +81,7 @@
 							<h6 class="mt-2 mb-0 col-12 text-white text-center"><i id="cal-hoy">hoy</i></h6>
 						</ul>
 					</div>
-					<table class="table">
+					<table class="table shadow-sm">
 						<thead class="weekdays">
 							<tr>
 								<td scope="col">Lu</th>
@@ -155,6 +155,7 @@
 					  <!-- Input concepto -->
 					  <div id='div_concepto' class="form-group input-group col-sm-9 col-8 ui-widget">
 					  <input id="concepto" class="form-control autocomplete " value="">
+				  	  <button id="btn-concepto-drop" class="btn shadow-sm btn-secondary dropdown-toggle px-1" type="button" data-toggle="dropdown"></button>
 					  <div class="col-md-12 mx-auto">
 						  <h6 class="text-center small text-info">Concepto</h6>
 					  </div>
@@ -165,7 +166,7 @@
 					  <!-- Input end concepto -->
 				  </div>
 				  <!-- end concepto y cantidad -->
-  
+
 			  <!-- Input predial-->
 			  <div id='div_predial' class="form-group input-group">
 				  <div class="input-group-prepend ">
@@ -177,6 +178,8 @@
 				  </div>
 	
 				  <input id="predio" value="" class="form-control ">
+				  <button id="btn-predio-drop" class="btn shadow-sm btn-secondary dropdown-toggle px-1" type="button" data-toggle="dropdown"></button>
+
 				  <div class="col-md-12 mx-auto">
 					<h6 class="text-center small text-info">Predio</h6>
 				  </div>

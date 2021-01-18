@@ -203,13 +203,25 @@ $( function() {
 		data:{},
 		success:function(data){ 
 			$( "#concepto" ).autocomplete({
-				source: data.conceptos
+				source: data.conceptos,
+				minLength: 0,
+				autoFocus: true,
+				autoSelect: true
 			});
 			$( "#predio" ).autocomplete({
-				source: data.predios
+				source: data.predios,
+				minLength: 0,
+				autoFocus: true,
+				autoSelect: true
 			});
 		},
 		dataType: 'json' 
 	})
-
 } );
+
+$('#btn-concepto-drop').click(()=>{
+	$("#concepto").autocomplete( "search" , "" );
+})
+$('#btn-predio-drop').click(()=>{
+	$("#predio").autocomplete( "search" , "" );
+})
