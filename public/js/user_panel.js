@@ -117,7 +117,6 @@ function refreshInputs(errors){
 	}
 	if(errors.includes('Cantidad invalida')){
 		makeInputValid(cantidad,div_cantidad,lb_cantidad,false,'Cantidad invalida')
-		cantidad.val('0');
 	}
 	if(errors.includes('Fecha invalida')){
 		makeInputValid(fecha,div_cantidad,lb_cantidad,false,'Fecha invalida')
@@ -131,7 +130,6 @@ function refreshInputs(errors){
 	}
 	if(errors.includes('Cantidad vacio')){
 		makeInputValid(cantidad,div_cantidad,lb_cantidad,false,'Agregue la cantidad')
-		cantidad.val('0');
 	}
 	if(errors.includes('Fecha vacio')){
 		makeInputValid(fecha,div_cantidad,lb_cantidad,false,'Agregue la fecha')
