@@ -179,7 +179,7 @@ router.post('/edit/:p_date',(req,res)=>{
 				//Cantidad
 				if(cantidad=='')
 					respuesta.push({msgtype:201,msg:'Cantidad vacio'});
-				else if (isNaN(cantidad))
+				else if (Number.isInteger(cantidad))
 					respuesta.push({msgtype:202,msg:"Cantidad invalida"});
 
 				if (respuesta.length>0){ //got errors
@@ -194,7 +194,7 @@ router.post('/edit/:p_date',(req,res)=>{
 							if(index<newDay.datos.length){
 								newDay.datos[index]={
 									concepto:concepto,
-									cantidad:cantidad,
+									cantidad:parseInt(cantidad),
 									id_concepto:config_form.findConceptoID(concepto),
 									id_elemento:config_form.findPredioID(predio),
 									predio:predio

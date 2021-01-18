@@ -54,3 +54,7 @@
 .bt-delete:hover{
     opacity: 0.8;
 }
+
+.td-infoIcon{
+    max-width: 1px;
+}
