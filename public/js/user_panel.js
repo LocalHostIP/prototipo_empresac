@@ -153,7 +153,6 @@ function deleteRegister(index){
 			index:index
 		}, // data recive un objeto con la informacion que se enviara al servidor
 		success:function(datos){ //success es una funcion que se utiliza si el servidor retorna informacion
-			console.log(datos)
 			let type_errors=[]
 			let msgs=[]
 			//check server messages
@@ -161,7 +160,8 @@ function deleteRegister(index){
 				type_errors.push(datos[i].msgtype)
 				msgs.push(datos[i].msg)
 			}     
-
+			console.log(msgs);
+			
 			if(type_errors.includes(100)){ //Fecha eliminada con exito
 				location.reload();
 			}	

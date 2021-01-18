@@ -63,6 +63,40 @@ router.get('/:p_date',(req,res)=>{
 	}
 });
 
+router.post('/infoweek',(req,res)=>{
+	//validate day
+	if(req.isAuthenticated()){ //Validate role 
+		user=req.user;
+		if(user['role']==config_role.User){ 
+			const {week} = req.body; 
+
+			let user=req.user;
+			let weekResponse=[];
+
+			week.forEach(element => {
+				Fechadb.findOne({usuario:user.usuario,fecha:(element.toString())}).exec((err,resDate)=>{
+					if(resDate) {
+						let cantidad=0;
+						resDate.datos.forEach(element => {
+							cantidad+=element.cantidad;
+						});
+						weekResponse.push(cantidad);
+						if(weekResponse.length==7){
+							res.send(weekResponse);
+						}
+					}else{
+						weekResponse.push('--');
+						if(weekResponse.length==7){
+							res.send(weekResponse);
+						}
+					} 
+					})
+			});
+		}
+	}
+});
+
+
 //Posts
 
 router.post('/delete/:p_date',(req,res)=>{
@@ -222,7 +256,7 @@ router.post('/:p_date',(req,res)=>{
 				//Cantidad
 				if(cantidad=='')
 					respuesta.push({msgtype:201,msg:'Cantidad vacio'});
-				else if (isNaN(cantidad))
+				else if (Number.isInteger(cantidad))
 					respuesta.push({msgtype:202,msg:"Cantidad invalida"});
 
 				if (respuesta.length>0){ //got errors
@@ -234,7 +268,7 @@ router.post('/:p_date',(req,res)=>{
 							newDay=resDate;
 							newDay.datos.push({
 								concepto:concepto,
-								cantidad:cantidad,
+								cantidad: parseInt(cantidad),
 								id_concepto:config_form.findConceptoID(concepto),
 								id_elemento:config_form.findPredioID(predio),
 								predio:predio
@@ -248,7 +282,7 @@ router.post('/:p_date',(req,res)=>{
 								habilitado:true,
 								datos:[{
 									concepto:concepto,
-									cantidad:cantidad,
+									cantidad: parseInt(cantidad),
 									id_concepto:config_form.findConceptoID(concepto),
 									id_elemento:config_form.findPredioID(predio),
 									predio:predio

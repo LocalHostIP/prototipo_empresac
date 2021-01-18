@@ -1,0 +1,94 @@
+.datepicker *{
+    font-family: Verdana, sans-serif;
+    list-style-type: none;
+    box-sizing: border-box;
+  }
+  
+  .month {
+    padding: 10px 30px;
+    width: 100%;
+    background: #0c76e8;
+    text-align: center;
+  }
+  
+  .month ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .month ul li {
+    color: white;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  
+  /* Previous button inside month header */
+  .month .prev {
+    float: left;
+    padding-top: 10px;
+  }
+  
+  /* Next button */
+  .month .next {
+    float: right;
+    padding-top: 10px;
+  }
+
+  .month .next:hover {
+    color: #d1cfcf;
+    cursor: pointer;
+  }
+
+  .month .prev:hover {
+    color: #d1cfcf;
+    cursor: pointer;
+  }
+  
+  .weekdays{
+    background-color:#ddd;
+    color: #666;
+    text-align: center;
+    font-size: 15px;
+    font-weight: normal;
+  }
+  
+  .days{
+    background: #eee;
+    text-align: center;
+    font-size:13px;
+    color: #777;
+  }
+  
+  .day-active{
+    background-color: #0c76e8;
+    color: white;
+    border-radius: 15px;
+    width: 100%;
+    padding: 2px;
+  }
+
+  .day-nofilled{
+    color: #eb4034;
+  }
+  
+  .days td:hover{
+    background-color: #d1cfcf; 
+    cursor: pointer;
+  }
+
+  .des{
+    background: #eee;
+    background: #eee;
+    text-align: center;
+    font-size:12px;
+    color: #777;
+  }
+
+  #cal-hoy{
+    font-size: 13px;
+  }
+
+  #cal-hoy:hover{
+    cursor: pointer;
+  }

@@ -13,6 +13,7 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<link rel="stylesheet" href="/css/user_panel.css">
+	<link rel="stylesheet" href="/css/extras/datepicker.css">
 
 </head>
 <body>
@@ -64,20 +65,59 @@
 			<!-- end nombre -->
 			
 			<!-- Input fecha -->
-			<div class="row" >
-			<div id='div_date' class="form-group input-group col-sm-8 col-11 mx-auto">
-				<div class="input -group-prepend">
-					<span class="input-group-text">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-calendar2-event-fill" viewBox="0 0 16 16">
-							<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zm9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5zM11.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
-						  </svg></span>
+
+			<!-- Input fecha -->
+
+			<input id='date' type="date" class="form-control" style="display: none;" type="text" value="<%=data.fecha%>"  required/>
+
+			<!-- date picker -->
+			<div class="row my-0 py-0">
+				<div class='datepicker my-0 py-0 col-sm-12 col-12 mx-auto'>
+					<div class="month">
+						<ul>
+							<li id="prev-week" class="prev">&#10094;</li>
+							<li id="next-week" class="next">&#10095;</li>
+							<li><div id='month'>August</div><span id="year" style="font-size:16px">2017</span></li>
+							<h6 class="mt-2 mb-0 col-12 text-white text-center"><i id="cal-hoy">hoy</i></h6>
+						</ul>
+					</div>
+					<table class="table">
+						<thead class="weekdays">
+							<tr>
+								<td scope="col">Lu</th>
+								<td scope="col">Ma</th>
+								<td scope="col">Mi</th>
+								<td scope="col">Ju</th>
+								<td scope="col">Vi</th>
+								<td scope="col">Sa</th>
+								<td scope="col">Do</th>
+							</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="days">
+								<td onclick="changeDate(0)" id="day0"></td>
+								<td onclick="changeDate(1)" id="day1"></td>
+								<td onclick="changeDate(2)" id="day2"></td>
+								<td onclick="changeDate(3)" id="day3"></td>
+								<td onclick="changeDate(4)" id="day4"></td>
+								<td onclick="changeDate(5)" id="day5"></td>
+								<td onclick="changeDate(6)" id="day6"></td>
+							</tr>
+							<tr class="des">
+								<td id="des0">--</td>
+								<td id="des1">--</td>
+								<td id="des2">--</td>
+								<td id="des3">--</td>
+								<td id="des4">--</td>
+								<td id="des5">--</td>
+								<td id="des6">--</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<input id='date' type="date" class="form-control " placeholder="Fecha" type="text" value="<%=data.fecha%>"  required/>
-				<div id="lbDate_invalid" class="invalid-feedback">
-					Colocar fecha
-				</div>
-			</div>
 			</div>	
+			<!-- end date picker -->
 			 <!-- end input fecha -->
 			<!-- Divider -->
 			<p class="divider-text">
@@ -241,5 +281,6 @@
 	  </div>
 	
 	<script src="/js/user_panel.js"></script>
+	<script src="/js/extras/datepicker.js"></script>
 </body>
 </html>
