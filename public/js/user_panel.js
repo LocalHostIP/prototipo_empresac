@@ -174,7 +174,7 @@ function editRegister(index){
 	//Change button and use 
 	$('#btn_submit').html('Actualizar')
 	$("#concepto").val($("#concepto"+index).html());
-	$("#cantidad").val($("#cantidad"+index).html());
+	$("#cantidad").val($("#cantidad"+index).html().slice(0,-4));
 	$("#predio").val($("#predio"+index).html());
 	$('#btn_cancel').css("display","block");
 	index_edit=index;
