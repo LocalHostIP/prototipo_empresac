@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 module.exports = function(passport) {
 	passport.use(new LocalStrategy({usernameField : 'username'},(user,password,done)=> { //Login 
 		//match user
-		User.findOne({usuario : user})
+		User.findOne({usuario : (user.toUpperCase())})
 		.then((user)=>{
 		 if(!user) {
 			 return done(null,false);
