@@ -72,20 +72,19 @@ router.post('/infoweek',(req,res)=>{
 
 			let user=req.user;
 			let weekResponse=[];
-
 			week.forEach(element => {
 				Fechadb.findOne({usuario:user.usuario,fecha:(element.toString())}).exec((err,resDate)=>{
+					weekResponse.push('--');
 					if(resDate) {
 						let cantidad=0;
 						resDate.datos.forEach(element => {
 							cantidad+=element.cantidad;
 						});
-						weekResponse.push(cantidad);
+						weekResponse[week.indexOf(element)]=cantidad;
 						if(weekResponse.length==7){
 							res.send(weekResponse);
 						}
 					}else{
-						weekResponse.push('--');
 						if(weekResponse.length==7){
 							res.send(weekResponse);
 						}
