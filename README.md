@@ -1,11 +1,8 @@
 # prototipo_empresac
-Prototipo_empresac
+Ejemplo de llenado de formulario de bitacora, con sistema de loggeo
 
+Aplicación hosteada en: 
 
-
-
-
-
-Templates used
-https://github.com/rtsinani/jquery-datepicker-skins.git
-https://bootstrapious.com/p/bootstrap-vertical-navbar
+Usuario y contraseña ejemplo:
+JYR
+1234
